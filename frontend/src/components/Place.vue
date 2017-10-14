@@ -9,12 +9,16 @@
                 class="mb-2">
       <p class="card-text">
       {{ this.place.description }}
+
+      <place-rating v-bind:place="place" />
       </p>
     </b-card>
   </b-row>
 </template>
 
 <script>
+import PlaceRating from './PlaceRating'
+
 export default {
   name: 'place',
   data () {
@@ -27,6 +31,7 @@ export default {
       this.$http.get('http://localhost:3000/api/places/' + this.$route.params.id).then(response => {
         console.log(response.body);
         this.place = response.body;
+        this.place.rated = this.$cookie.get('place_rated_' + this.place.id) == 'true'
       }, response => {
         console.log('error')
       });
@@ -34,6 +39,9 @@ export default {
   },
   beforeMount(){
       this.getPlace()
+  },
+  components: {
+    PlaceRating
   }
 }
 </script>

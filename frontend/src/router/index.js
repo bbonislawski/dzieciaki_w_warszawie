@@ -21,7 +21,7 @@ export default new Router({
     },
     {
       path: '/',
-      name: 'Main',
+      name: 'Places List',
       component: PlacesList
     },
     {

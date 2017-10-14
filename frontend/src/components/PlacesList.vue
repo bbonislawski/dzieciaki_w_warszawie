@@ -9,8 +9,9 @@
                   style="max-width: 20rem;"
                   class="mb-2">
         <p class="card-text">
-        {{ place.short_description }}
+          {{ place.short_description }}
         </p>
+        <place-rating v-bind:place="place" />
         <b-button v-bind:href="'/#/places/' + place.id" variant="primary" style='border-radius: 15em'>Sprawdź</b-button>
       </b-card>
     </b-col>
@@ -18,6 +19,8 @@
 </template>
 
 <script>
+import PlaceRating from './PlaceRating'
+
 export default {
   name: 'places-list',
   data () {
@@ -28,15 +31,20 @@ export default {
   methods: {
     getPlaces() {
       this.$http.get('http://localhost:3000/api/places').then(response => {
-        console.log(response.body);
         this.places = response.body;
+        for(let place of this.places){
+          place.rated = this.$cookie.get('place_rated_' + place.id) == 'true'
+        }
       }, response => {
         console.log('error')
       });
-    }
+    },
   },
   beforeMount(){
       this.getPlaces()
+  },
+  components: {
+    PlaceRating
   }
 }
 </script>

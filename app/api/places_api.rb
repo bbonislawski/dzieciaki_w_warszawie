@@ -25,6 +25,17 @@ class PlacesAPI < API
       Place.find(params[:id])
     end
 
+    params do
+      optional :rating
+    end
+    post :rate do
+      place = Place.find(params[:id])
+      place.ratings_count = place.ratings_count + 1
+      place.rating += params[:rating].to_i
+      place.save
+      place
+    end
+
     params { use :places_params }
     put do
       order = Place.find(params[:id])
