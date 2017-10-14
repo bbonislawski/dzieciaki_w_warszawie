@@ -11,10 +11,10 @@
         <b-nav-item href="/#/places" active>Miejsca</b-nav-item>
         <b-nav-item href="/#/events">Wydarzenia</b-nav-item>
 
-        <b-nav-form>
-          <b-form-input size="sm" class="mr-sm-2" type="text" placeholder="Szukaj"/>
-          <b-button size="sm" class="my-2 my-sm-0" type="submit">Szukaj</b-button>
-        </b-nav-form>
+        <!-- <b-nav-form> -->
+        <!--   <b-form-input size="sm" class="mr-sm-2" type="text" placeholder="Szukaj"/> -->
+        <!--   <b-button size="sm" class="my-2 my-sm-0" type="submit">Szukaj</b-button> -->
+        <!-- </b-nav-form> -->
       </b-nav>
 
     </b-collapse>

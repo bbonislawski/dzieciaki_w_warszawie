@@ -32,6 +32,7 @@ class PlacesAPI < API
       place = Place.find(params[:id])
       place.ratings_count = place.ratings_count + 1
       place.rating += params[:rating].to_i
+      place.avg_rating = place.rating.to_f / place.ratings_count
       place.save
       place
     end
