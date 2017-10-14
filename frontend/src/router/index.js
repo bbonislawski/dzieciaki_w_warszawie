@@ -5,7 +5,6 @@ import VueResource from 'vue-resource'
 import Main from '@/components/Main'
 
 Vue.use(Router)
-Vue.use(VueResource)
 Vue.use(VueGoogleMaps, {
   load: {
     key: '',
