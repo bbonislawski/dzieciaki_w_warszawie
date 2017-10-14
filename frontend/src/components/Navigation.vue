@@ -1,39 +1,20 @@
 <template>
-  <b-navbar toggleable="md" type="dark" variant="light">
-
+  <b-navbar toggleable="md" type="dark">
     <b-nav-toggle target="nav_collapse"></b-nav-toggle>
 
-    <b-navbar-brand href="#"><b-img width="250px" src="https://m20.targeo.pl/i/cache/static/wiki/miasto/wa/warszawa.jpg"/></b-navbar-brand>
+    <b-navbar-brand style='width: 80%; padding-left: 10%' href="#"><b-img style='width: 100%' src="/static/logo1.png"/></b-navbar-brand>
 
     <b-collapse is-nav id="nav_collapse">
 
-      <b-nav is-nav-bar>
-        <b-nav-item href="#">Link</b-nav-item>
-        <b-nav-item href="#" disabled>Disabled</b-nav-item>
-      </b-nav>
 
-      <b-nav is-nav-bar class="ml-auto">
+      <b-nav is-nav-bar class="ml-auto" style='padding-right: 25%'>
+        <b-nav-item href="/#/places" active>Miejsca</b-nav-item>
+        <b-nav-item href="/#/events">Wydarzenia</b-nav-item>
 
         <b-nav-form>
-          <b-form-input size="sm" class="mr-sm-2" type="text" placeholder="Search"/>
-          <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
+          <b-form-input size="sm" class="mr-sm-2" type="text" placeholder="Szukaj"/>
+          <b-button size="sm" class="my-2 my-sm-0" type="submit">Szukaj</b-button>
         </b-nav-form>
-
-        <!-- <b-nav-item-dropdown text="Lang" right> -->
-        <!--   <b-dropdown-item href="#">EN</b-dropdown-item> -->
-        <!--   <b-dropdown-item href="#">ES</b-dropdown-item> -->
-        <!--   <b-dropdown-item href="#">RU</b-dropdown-item> -->
-        <!--   <b-dropdown-item href="#">FA</b-dropdown-item> -->
-        <!-- </b-nav-item-dropdown> -->
-
-        <!-- <b-nav-item-dropdown right> -->
-        <!--   <1!-- Using button-content slot --1> -->
-        <!--   <template slot="button-content"> -->
-        <!--     <em>User</em> -->
-        <!--   </template> -->
-        <!--   <b-dropdown-item href="#">Profile</b-dropdown-item> -->
-        <!--   <b-dropdown-item href="#">Signout</b-dropdown-item> -->
-        <!-- </b-nav-item-dropdown> -->
       </b-nav>
 
     </b-collapse>
@@ -51,4 +32,15 @@ export default {
 </script>
 
 <style scoped>
+* {
+  font-family: 'Kohinoor Bangla';
+}
+.bg-light {
+  background-color: #fff;
+}
+.navbar-dark .navbar-nav .nav-link {
+  color: black;
+  font-family: 'Kohinoor Bangla';
+  font-size: 20px;
+}
 </style>

@@ -22,7 +22,7 @@ class PlacesAPI < API
 
   route_param :id do
     get do
-      Place.find_by(params[:id])
+      Place.find(params[:id])
     end
 
     params { use :places_params }

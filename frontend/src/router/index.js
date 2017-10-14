@@ -2,8 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import * as VueGoogleMaps from 'vue2-google-maps'
 import VueResource from 'vue-resource'
-import Main from '@/components/Main'
-import Navigation from '@/components/Navigation'
+import Place from '@/components/Place'
+import PlacesList from '@/components/PlacesList'
 
 Vue.use(Router)
 Vue.use(VueGoogleMaps, {
@@ -15,9 +15,19 @@ Vue.use(VueGoogleMaps, {
 export default new Router({
   routes: [
     {
+      path: '/places',
+      name: 'Places List',
+      component: PlacesList
+    },
+    {
       path: '/',
       name: 'Main',
-      component: Main
+      component: PlacesList
+    },
+    {
+      path: '/places/:id',
+      name: 'Place',
+      component: Place
     }
   ]
 })
