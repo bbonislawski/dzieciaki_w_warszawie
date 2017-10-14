@@ -1,16 +1,31 @@
 <template>
   <div>
-    <h1>{{ msg }}</h1>
-    <button class="btn btn-primary" v-on:click="getPlaces()">Get a Quote</button>
-    <ul id="places-list">
-      <li v-for="place in places">
-        {{ place.name }}
-      </li>
-    </ul>
+    <navigation/>
+        <b-container class="bv-example-row">
+            <b-row>
+                <b-col sm='4' v-for="place in places">
+                  <b-card v-bind:title="place.name"
+                        v-bind:img-src="place.image"
+                        v-bind:img-alt="place.name"
+                        img-top
+                        tag="article"
+                        style="max-width: 20rem;"
+                        class="mb-2">
+                  <p class="card-text">
+                  {{ place.description }}
+                  </p>
+                  <b-button href="#" variant="primary">Sprawdź</b-button>
+                </b-card>
+
+              </b-col>
+            </b-row>
+        </b-container>
   </div>
 </template>
 
 <script>
+import Navigation from './Navigation'
+
 export default {
   name: 'main',
   fetchData() {
@@ -32,6 +47,12 @@ export default {
         console.log('error')
       });
     }
+  },
+  beforeMount(){
+      this.getPlaces()
+  },
+  components: {
+    Navigation
   }
 }
 </script>
