@@ -67,6 +67,25 @@ var Component = normalizeComponent(
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -74,7 +93,7 @@ var Component = normalizeComponent(
   name: 'place',
   data() {
     return {
-      place: { name: '', image: '', description: '' }
+      place: { name: '', image: '', description: '', lat: 0, lng: 0 }
     };
   },
   methods: {
@@ -86,6 +105,9 @@ var Component = normalizeComponent(
       }, response => {
         console.log('error');
       });
+    },
+    generateLocation() {
+      return { lat: parseFloat(this.place.lat), lng: parseFloat(this.place.lng) };
     }
   },
   beforeMount() {
@@ -192,6 +214,8 @@ var Component = normalizeComponent(
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__PlaceRating__ = __webpack_require__("c4i+");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_multiselect__ = __webpack_require__("RUzx");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_multiselect___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_multiselect__);
 //
 //
 //
@@ -249,6 +273,27 @@ var Component = normalizeComponent(
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -260,8 +305,10 @@ var Component = normalizeComponent(
       selectedAge: null,
       minRating: null,
       freeEntrance: null,
+      selectedDistricts: [],
       minRatingOptions: [1, 2, 3, 4, 5],
-      freeEntranceOptions: [{ value: 'false', text: 'Nie' }, { value: 'true', text: 'Tak' }]
+      freeEntranceOptions: [{ value: 'false', text: 'Nie' }, { value: 'true', text: 'Tak' }],
+      districts: ['Bemowo', 'Białołęka', 'Bielany', 'Mokotów', 'Ochota', 'Praga-Południe', 'Praga-Północ', 'Rembertów', 'Śródmieście', 'Targówek', 'Ursus', 'Ursynów', 'Wawer', 'Wesoła', 'Wilanów', 'Włochy', 'Wola', 'Żoliborz']
     };
   },
   methods: {
@@ -289,23 +336,26 @@ var Component = normalizeComponent(
       if (!!this.minRating) {
         filters.q.avg_rating_gteq = this.minRating;
       }
+      if (this.selectedDistricts) {
+        filters.q.district_in = this.selectedDistricts;
+      }
       this.getPlaces(filters);
+    },
+    clearFilters() {
+      this.selectedAge = null;
+      this.freeEntrance = null;
+      this.minRating = null;
+      this.selectedDistricts = [];
+      this.getPlaces();
     }
   },
   beforeMount() {
     this.getPlaces();
   },
   components: {
-    PlaceRating: __WEBPACK_IMPORTED_MODULE_0__PlaceRating__["a" /* default */]
+    PlaceRating: __WEBPACK_IMPORTED_MODULE_0__PlaceRating__["a" /* default */], Multiselect: __WEBPACK_IMPORTED_MODULE_1_vue_multiselect___default.a
   }
 });
-
-/***/ }),
-
-/***/ "ENy6":
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
 
 /***/ }),
 
@@ -320,7 +370,7 @@ var Component = normalizeComponent(
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('b-row',[_c('b-card',{staticClass:"mb-2",staticStyle:{"width":"100%"},attrs:{"title":this.place.name,"img-src":this.place.image,"img-alt":this.place.name,"img-top":"","tag":"article"}},[_c('p',{staticClass:"card-text"},[_vm._v("\n    "+_vm._s(this.place.description)+"\n\n    "),_c('place-rating',{attrs:{"place":_vm.place}})],1)])],1)}
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('b-row',[_c('b-card',{staticClass:"mb-2",staticStyle:{"width":"100%"},attrs:{"title":this.place.name,"img-src":this.place.image,"img-alt":this.place.name,"img-top":"","tag":"article"}},[_c('p',{staticClass:"card-text"},[_c('b-row',[_c('b-col',{attrs:{"sm":"5"}},[_c('gmap-map',{staticStyle:{"width":"100%","height":"300px"},attrs:{"center":_vm.generateLocation(),"zoom":15,"map-type-id":"terrain"}},[_c('gmap-marker',{attrs:{"position":_vm.generateLocation(),"clickable":true}})],1)],1),_vm._v(" "),_c('b-col',{attrs:{"sm":"7"}},[_vm._v("\n        "+_vm._s(this.place.description)+"\n      ")])],1),_vm._v(" "),_c('place-rating',{attrs:{"place":_vm.place}})],1)])],1)}
 var staticRenderFns = []
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
@@ -367,7 +417,7 @@ var Component = normalizeComponent(
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('b-row',[_c('b-col',{attrs:{"sm":"3"}},[_c('b-form-group',{attrs:{"id":"fieldset1","label":"Wiek dziecka"}},[_c('b-form-input',{attrs:{"type":"number","min":"0","max":"20"},model:{value:(_vm.selectedAge),callback:function ($$v) {_vm.selectedAge=$$v},expression:"selectedAge"}})],1)],1),_vm._v(" "),_c('b-col',{attrs:{"sm":"3"}},[_c('b-form-group',{attrs:{"id":"fieldset2","label":"Minimalna ocena"}},[_c('b-form-select',{staticClass:"mb-3",attrs:{"options":_vm.minRatingOptions},model:{value:(_vm.minRating),callback:function ($$v) {_vm.minRating=$$v},expression:"minRating"}})],1)],1),_vm._v(" "),_c('b-col',{attrs:{"sm":"3"}},[_c('b-form-group',{attrs:{"id":"fieldset3","label":"Darmowe wejscie"}},[_c('b-form-select',{staticClass:"mb-3",attrs:{"options":_vm.freeEntranceOptions},model:{value:(_vm.freeEntrance),callback:function ($$v) {_vm.freeEntrance=$$v},expression:"freeEntrance"}})],1)],1),_vm._v(" "),_c('b-button',{staticStyle:{"height":"50px","width":"150px","margin-top":"27px"},attrs:{"variant":"secondary"},on:{"click":function($event){_vm.filterPlaces()}}},[_vm._v("\n        Filtruj\n      ")])],1),_vm._v(" "),_c('b-row',_vm._l((_vm.places),function(place){return _c('b-col',{attrs:{"sm":"4"}},[_c('b-card',{staticClass:"mb-2",staticStyle:{"max-width":"20rem"},attrs:{"title":place.name,"img-src":place.image,"img-alt":place.name,"img-top":"","tag":"article"}},[_c('p',{staticClass:"card-text"},[_vm._v("\n          "+_vm._s(place.short_description)+"\n        ")]),_vm._v(" "),_c('place-rating',{attrs:{"place":place}}),_vm._v(" "),_c('b-button',{staticStyle:{"border-radius":"15em"},attrs:{"href":'/#/places/' + place.id,"variant":"primary"}},[_vm._v("Sprawdź")])],1)],1)}))],1)}
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('b-row',[_c('b-col',{attrs:{"sm":"3"}},[_c('b-form-group',{attrs:{"id":"fieldset1","label":"Wiek dziecka"}},[_c('b-form-input',{attrs:{"type":"number","min":"0","max":"20"},model:{value:(_vm.selectedAge),callback:function ($$v) {_vm.selectedAge=$$v},expression:"selectedAge"}})],1)],1),_vm._v(" "),_c('b-col',{attrs:{"sm":"3"}},[_c('b-form-group',{attrs:{"id":"fieldset2","label":"Minimalna ocena"}},[_c('b-form-select',{staticClass:"mb-3",attrs:{"options":_vm.minRatingOptions},model:{value:(_vm.minRating),callback:function ($$v) {_vm.minRating=$$v},expression:"minRating"}})],1)],1),_vm._v(" "),_c('b-col',{attrs:{"sm":"3"}},[_c('b-form-group',{attrs:{"id":"fieldset3","label":"Darmowe wejscie"}},[_c('b-form-select',{staticClass:"mb-3",attrs:{"options":_vm.freeEntranceOptions},model:{value:(_vm.freeEntrance),callback:function ($$v) {_vm.freeEntrance=$$v},expression:"freeEntrance"}})],1)],1),_vm._v(" "),_c('b-col',{attrs:{"sm":"3"}},[_c('b-form-group',{attrs:{"id":"fieldset4","label":"Dzielnica"}},[_c('multiselect',{staticClass:"mb-3",attrs:{"options":_vm.districts,"multiple":true,"close-on-select":false},model:{value:(_vm.selectedDistricts),callback:function ($$v) {_vm.selectedDistricts=$$v},expression:"selectedDistricts"}})],1)],1)],1),_vm._v(" "),_c('b-row',[_c('b-col',{attrs:{"sm":"3"}}),_vm._v(" "),_c('b-col',{staticStyle:{"margin-left":"50px"},attrs:{"sm":"4"}},[_c('b-button',{staticStyle:{"height":"50px","width":"150px"},attrs:{"variant":"success"},on:{"click":function($event){_vm.filterPlaces()}}},[_vm._v("\n        Filtruj\n      ")]),_vm._v(" "),_c('b-button',{staticStyle:{"height":"50px","width":"150px"},attrs:{"variant":"secondary"},on:{"click":function($event){_vm.clearFilters()}}},[_vm._v("\n        Wyczyść\n      ")])],1),_vm._v(" "),_c('b-col',{attrs:{"sm":"4"}})],1),_vm._v(" "),_c('b-row',{staticStyle:{"margin-top":"20px"}},_vm._l((_vm.places),function(place){return _c('b-col',{attrs:{"sm":"4"}},[_c('b-card',{staticClass:"mb-2",staticStyle:{"max-width":"20rem"},attrs:{"title":place.name,"img-src":place.image,"img-alt":place.name,"img-top":"","tag":"article"}},[_c('p',{staticClass:"card-text"},[_vm._v("\n          "+_vm._s(place.short_description)+"\n        ")]),_vm._v(" "),_c('place-rating',{attrs:{"place":place}}),_vm._v(" "),_c('b-button',{staticStyle:{"border-radius":"15em"},attrs:{"href":'/#/places/' + place.id,"variant":"primary"}},[_vm._v("Sprawdź")])],1)],1)}))],1)}
 var staticRenderFns = []
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
@@ -383,15 +433,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__App__ = __webpack_require__("M93x");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__router__ = __webpack_require__("YaEn");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vue_resource__ = __webpack_require__("ORbq");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_bootstrap_vue__ = __webpack_require__("sCSS");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vue_star_rating__ = __webpack_require__("X+2x");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vue_star_rating___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_vue_star_rating__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_vue_cookie__ = __webpack_require__("K/Lq");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_vue_cookie___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_vue_cookie__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_bootstrap_dist_css_bootstrap_css__ = __webpack_require__("Jmt5");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_bootstrap_dist_css_bootstrap_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_bootstrap_dist_css_bootstrap_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_bootstrap_vue_dist_bootstrap_vue_css__ = __webpack_require__("9M+g");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_bootstrap_vue_dist_bootstrap_vue_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_bootstrap_vue_dist_bootstrap_vue_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vue2_google_maps__ = __webpack_require__("sA6N");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vue2_google_maps___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_vue2_google_maps__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_bootstrap_vue__ = __webpack_require__("sCSS");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_vue_star_rating__ = __webpack_require__("X+2x");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_vue_star_rating___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_vue_star_rating__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_vue_cookie__ = __webpack_require__("K/Lq");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_vue_cookie___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_vue_cookie__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_bootstrap_dist_css_bootstrap_css__ = __webpack_require__("Jmt5");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_bootstrap_dist_css_bootstrap_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_bootstrap_dist_css_bootstrap_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_bootstrap_vue_dist_bootstrap_vue_css__ = __webpack_require__("9M+g");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_bootstrap_vue_dist_bootstrap_vue_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_bootstrap_vue_dist_bootstrap_vue_css__);
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 
@@ -404,12 +456,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+
 __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].config.productionTip = false;
 __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].use(__WEBPACK_IMPORTED_MODULE_3_vue_resource__["a" /* default */]);
-__WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].use(__WEBPACK_IMPORTED_MODULE_4_bootstrap_vue__["a" /* default */]);
-__WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].use(__WEBPACK_IMPORTED_MODULE_6_vue_cookie___default.a);
-__WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].component('star-rating', __WEBPACK_IMPORTED_MODULE_5_vue_star_rating___default.a);
+__WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].use(__WEBPACK_IMPORTED_MODULE_5_bootstrap_vue__["a" /* default */]);
+__WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].use(__WEBPACK_IMPORTED_MODULE_7_vue_cookie___default.a);
+__WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].component('star-rating', __WEBPACK_IMPORTED_MODULE_6_vue_star_rating___default.a);
 if (window.location.href.indexOf('localhost') > -1) window.API_URL = 'http://localhost:3000/api';else window.API_URL = '/api';
+
+__WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].use(__WEBPACK_IMPORTED_MODULE_4_vue2_google_maps__, {
+  load: {
+    key: 'AIzaSyD_W4oHoXACZ9cUwLiZxRistJ2ye-qlZw4',
+    libraries: 'places.drawing'
+  }
+});
 
 /* eslint-disable no-new */
 new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */]({
@@ -543,12 +603,9 @@ var Component = normalizeComponent(
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__("7+uW");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__("/ocq");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue2_google_maps__ = __webpack_require__("sA6N");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue2_google_maps___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vue2_google_maps__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vue_resource__ = __webpack_require__("ORbq");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Place__ = __webpack_require__("RktK");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_PlacesList__ = __webpack_require__("vEw1");
-
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_resource__ = __webpack_require__("ORbq");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Place__ = __webpack_require__("RktK");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_PlacesList__ = __webpack_require__("vEw1");
 
 
 
@@ -556,25 +613,19 @@ var Component = normalizeComponent(
 
 
 __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
-__WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].use(__WEBPACK_IMPORTED_MODULE_2_vue2_google_maps__, {
-  load: {
-    key: 'AIzaSyD_W4oHoXACZ9cUwLiZxRistJ2ye-qlZw4',
-    libraries: 'places.drawing'
-  }
-});
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
   routes: [{
     path: '/places',
     name: 'Places List',
-    component: __WEBPACK_IMPORTED_MODULE_5__components_PlacesList__["a" /* default */]
+    component: __WEBPACK_IMPORTED_MODULE_4__components_PlacesList__["a" /* default */]
   }, {
     path: '/',
     name: 'Root',
-    component: __WEBPACK_IMPORTED_MODULE_5__components_PlacesList__["a" /* default */]
+    component: __WEBPACK_IMPORTED_MODULE_4__components_PlacesList__["a" /* default */]
   }, {
     path: '/places/:id',
     name: 'Place',
-    component: __WEBPACK_IMPORTED_MODULE_4__components_Place__["a" /* default */]
+    component: __WEBPACK_IMPORTED_MODULE_3__components_Place__["a" /* default */]
   }]
 }));
 
@@ -595,11 +646,6 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-//
-//
-//
-//
-//
 //
 //
 //
@@ -700,6 +746,13 @@ var Component = normalizeComponent(
 
 /***/ }),
 
+/***/ "fWn3":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "gj5N":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -726,7 +779,7 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('b-navbar',{attrs:{"toggleable":"md","type":"dark"}},[_c('b-nav-toggle',{attrs:{"target":"nav_collapse"}}),_vm._v(" "),_c('b-navbar-brand',{staticStyle:{"width":"80%","padding-left":"10%"},attrs:{"href":"#"}},[_c('b-img',{staticStyle:{"width":"100%"},attrs:{"src":"/static/logo1.png"}})],1),_vm._v(" "),_c('b-collapse',{attrs:{"is-nav":"","id":"nav_collapse"}},[_c('b-nav',{staticClass:"ml-auto",staticStyle:{"padding-right":"25%"},attrs:{"is-nav-bar":""}},[_c('b-nav-item',{attrs:{"href":"/#/places","active":""}},[_vm._v("Miejsca")]),_vm._v(" "),_c('b-nav-item',{attrs:{"href":"/#/events"}},[_vm._v("Wydarzenia")])],1)],1)],1)}
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('b-navbar',{attrs:{"toggleable":"md","type":"dark"}},[_c('b-nav-toggle',{attrs:{"target":"nav_collapse"}}),_vm._v(" "),_c('b-navbar-brand',{staticStyle:{"width":"80%","padding-left":"10%"},attrs:{"href":"/#/"}},[_c('b-img',{staticStyle:{"width":"100%"},attrs:{"src":"/static/logo1.png"}})],1),_vm._v(" "),_c('b-collapse',{attrs:{"is-nav":"","id":"nav_collapse"}},[_c('b-nav',{staticClass:"ml-auto",staticStyle:{"padding-right":"25%"},attrs:{"is-nav-bar":""}},[_c('b-nav-item',{attrs:{"href":"/#/places","active":""}},[_vm._v("Miejsca")]),_vm._v(" "),_c('b-nav-item',{attrs:{"href":"/#/events"}},[_vm._v("Wydarzenia")])],1)],1)],1)}
 var staticRenderFns = []
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
@@ -734,6 +787,13 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 /***/ }),
 
 /***/ "lG1T":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "nJs6":
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
@@ -864,7 +924,8 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_PlacesList_vue__ = __webpack_require__("A37c");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_399d96ae_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_PlacesList_vue__ = __webpack_require__("MPZa");
 function injectStyle (ssrContext) {
-  __webpack_require__("ENy6")
+  __webpack_require__("fWn3")
+  __webpack_require__("nJs6")
 }
 var normalizeComponent = __webpack_require__("VU/8")
 /* script */
@@ -920,4 +981,4 @@ var Component = normalizeComponent(
 /***/ })
 
 },["NHnr"]);
-//# sourceMappingURL=app.a537159f8a0501596687.js.map
+//# sourceMappingURL=app.d1559f1a9086550c08fd.js.map
