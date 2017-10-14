@@ -11,8 +11,11 @@ class PlacesAPI < API
     end
   end
 
+  params do
+    optional :q
+  end
   get do
-    Place.all
+    Place.ransack(params[:q]).result
   end
 
   params { use :places_params }

@@ -8,7 +8,7 @@ import PlacesList from '@/components/PlacesList'
 Vue.use(Router)
 Vue.use(VueGoogleMaps, {
   load: {
-    key: '',
+    key: 'AIzaSyD_W4oHoXACZ9cUwLiZxRistJ2ye-qlZw4',
     libraries: 'places.drawing',
   }
 })

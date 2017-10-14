@@ -79,7 +79,7 @@ var Component = normalizeComponent(
   },
   methods: {
     getPlace() {
-      this.$http.get('http://localhost:3000/api/places/' + this.$route.params.id).then(response => {
+      this.$http.get(API_URL + '/places/' + this.$route.params.id).then(response => {
         console.log(response.body);
         this.place = response.body;
         this.place.rated = this.$cookie.get('place_rated_' + this.place.id) == 'true';
@@ -261,12 +261,12 @@ var Component = normalizeComponent(
       minRating: null,
       freeEntrance: null,
       minRatingOptions: [1, 2, 3, 4, 5],
-      freeEntranceOptions: [{ value: false, text: 'Nie' }, { value: true, text: 'Tak' }]
+      freeEntranceOptions: [{ value: 'false', text: 'Nie' }, { value: 'true', text: 'Tak' }]
     };
   },
   methods: {
     getPlaces(filters) {
-      this.$http.get('http://localhost:3000/api/places', { params: filters }).then(response => {
+      this.$http.get(API_URL + '/places', { params: filters }).then(response => {
         this.places = response.body;
         for (let place of this.places) {
           place.rated = this.$cookie.get('place_rated_' + place.id) == 'true';
@@ -279,6 +279,16 @@ var Component = normalizeComponent(
       let filters = {
         q: {}
       };
+      if (!!this.selectedAge) {
+        filters.q.min_age_lt = this.selectedAge;
+        filters.q.max_age_gt = this.selectedAge;
+      }
+      if (!!this.freeEntrance) {
+        filters.q.free_entrance_eq = this.freeEntrance == 'true';
+      }
+      if (!!this.minRating) {
+        filters.q.avg_rating_gteq = this.minRating;
+      }
       this.getPlaces(filters);
     }
   },
@@ -399,6 +409,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].use(__WEBPACK_IMPORTED_MODU
 __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].use(__WEBPACK_IMPORTED_MODULE_4_bootstrap_vue__["a" /* default */]);
 __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].use(__WEBPACK_IMPORTED_MODULE_6_vue_cookie___default.a);
 __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].component('star-rating', __WEBPACK_IMPORTED_MODULE_5_vue_star_rating___default.a);
+if (window.location.href.indexOf('localhost') > -1) window.API_URL = 'http://localhost:3000/api';else window.API_URL = '/api';
 
 /* eslint-disable no-new */
 new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */]({
@@ -547,7 +558,7 @@ var Component = normalizeComponent(
 __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
 __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].use(__WEBPACK_IMPORTED_MODULE_2_vue2_google_maps__, {
   load: {
-    key: '',
+    key: 'AIzaSyD_W4oHoXACZ9cUwLiZxRistJ2ye-qlZw4',
     libraries: 'places.drawing'
   }
 });
@@ -820,7 +831,7 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
   },
   methods: {
     setRating(rating, place) {
-      this.$http.post('http://localhost:3000/api/places/' + place.id + '/rate', { rating: rating }).then(response => {
+      this.$http.post(API_URL + '/places/' + place.id + '/rate', { rating: rating }).then(response => {
         this.$cookie.set('place_rated_' + place.id, rating, 30);
         place.rated = true;
         place.rating = response.body.rating;
@@ -909,4 +920,4 @@ var Component = normalizeComponent(
 /***/ })
 
 },["NHnr"]);
-//# sourceMappingURL=app.868ca4fff397956dbd61.js.map
+//# sourceMappingURL=app.a537159f8a0501596687.js.map

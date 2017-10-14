@@ -28,7 +28,7 @@ export default {
   },
   methods: {
     getPlace() {
-      this.$http.get('http://localhost:3000/api/places/' + this.$route.params.id).then(response => {
+      this.$http.get(API_URL + '/places/' + this.$route.params.id).then(response => {
         console.log(response.body);
         this.place = response.body;
         this.place.rated = this.$cookie.get('place_rated_' + this.place.id) == 'true'

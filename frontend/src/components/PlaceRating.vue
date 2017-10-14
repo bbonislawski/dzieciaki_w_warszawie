@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     setRating(rating, place) {
-      this.$http.post('http://localhost:3000/api/places/' + place.id + '/rate', { rating: rating }).then(response => {
+      this.$http.post(API_URL + '/places/' + place.id + '/rate', { rating: rating }).then(response => {
         this.$cookie.set('place_rated_' + place.id, rating, 30);
         place.rated = true
         place.rating = response.body.rating;

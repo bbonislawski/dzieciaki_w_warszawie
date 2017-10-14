@@ -15,6 +15,11 @@ Vue.use(VueResource)
 Vue.use(BootstrapVue);
 Vue.use(VueCookie);
 Vue.component('star-rating', StarRating);
+if(window.location.href.indexOf('localhost') > -1)
+  window.API_URL='http://localhost:3000/api'
+else
+  window.API_URL='/api'
+
 
 /* eslint-disable no-new */
 new Vue({

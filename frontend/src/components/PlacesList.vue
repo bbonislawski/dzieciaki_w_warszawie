@@ -67,12 +67,12 @@ export default {
         minRating: null,
         freeEntrance: null,
         minRatingOptions: [ 1, 2, 3, 4, 5],
-        freeEntranceOptions: [ { value: false, text: 'Nie'}, { value: true, text: 'Tak' } ]
+        freeEntranceOptions: [ { value: 'false', text: 'Nie'}, { value: 'true', text: 'Tak' } ]
     }
   },
   methods: {
     getPlaces(filters) {
-      this.$http.get('http://localhost:3000/api/places', {params: filters}).then(response => {
+      this.$http.get(API_URL + '/places', {params: filters}).then(response => {
         this.places = response.body;
         for(let place of this.places){
           place.rated = this.$cookie.get('place_rated_' + place.id) == 'true'
@@ -86,6 +86,19 @@ export default {
         q: {
         }
       }
+      if(!!this.selectedAge)
+        {
+          filters.q.min_age_lt = this.selectedAge
+          filters.q.max_age_gt = this.selectedAge
+        }
+      if(!!this.freeEntrance)
+        {
+          filters.q.free_entrance_eq = (this.freeEntrance == 'true')
+        }
+      if(!!this.minRating)
+        {
+          filters.q.avg_rating_gteq = this.minRating
+        }
       this.getPlaces(filters)
     }
   },
