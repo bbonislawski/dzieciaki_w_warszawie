@@ -6,7 +6,8 @@ class PlacesAPI < API
       optional :lat, type: String
       optional :lng, type: String
       optional :name, type: String
-      optional :description
+      optional :description, type: String
+      optional :image, type: String
     end
   end
 
