@@ -8,8 +8,27 @@
                 style="width: 100%;"
                 class="mb-2">
       <p class="card-text">
-      {{ this.place.description }}
+      <b-row>
+        <b-col sm='5'>
+          <gmap-map
+            v-bind:center="generateLocation()"
+            :zoom="15"
+            map-type-id="terrain"
+            style="width: 100%; height: 300px"
+          >
+            <gmap-marker
+                :position="generateLocation()"
+                :clickable="true"
+                >
+            </gmap-marker>
+          </gmap-map>
 
+        </b-col>
+        <b-col sm='7'>
+          {{ this.place.description }}
+        </b-col>
+
+      </b-row>
       <place-rating v-bind:place="place" />
       </p>
     </b-card>
@@ -23,7 +42,7 @@ export default {
   name: 'place',
   data () {
     return {
-      place: { name: '', image: '', description: '' }
+      place: { name: '', image: '', description: '', lat: 0, lng: 0 }
     }
   },
   methods: {
@@ -35,6 +54,9 @@ export default {
       }, response => {
         console.log('error')
       });
+    },
+    generateLocation() {
+      return { lat: parseFloat(this.place.lat), lng: parseFloat(this.place.lng)}  ;
     }
   },
   beforeMount(){

@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import VueResource from 'vue-resource'
+import * as VueGoogleMaps from 'vue2-google-maps'
 import BootstrapVue from 'bootstrap-vue'
 import StarRating from 'vue-star-rating'
 import VueCookie from 'vue-cookie'
@@ -20,6 +21,12 @@ if(window.location.href.indexOf('localhost') > -1)
 else
   window.API_URL='/api'
 
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: 'AIzaSyD_W4oHoXACZ9cUwLiZxRistJ2ye-qlZw4',
+    libraries: 'places.drawing',
+  }
+})
 
 /* eslint-disable no-new */
 new Vue({

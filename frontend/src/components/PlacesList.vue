@@ -14,7 +14,6 @@
         </b-form-group>
       </b-col>
       <b-col sm='3'>
-
         <b-form-group
             id="fieldset2"
             label="Minimalna ocena"
@@ -31,11 +30,32 @@
           <b-form-select v-model="freeEntrance" :options="freeEntranceOptions" class="mb-3" />
         </b-form-group>
       </b-col>
-        <b-button variant='secondary' style="height: 50px; width: 150px; margin-top: 27px;" v-on:click="filterPlaces()">
+      <b-col sm='3'>
+        <b-form-group
+            id="fieldset4"
+            label="Dzielnica"
+        >
+          <multiselect v-model="selectedDistricts"
+                       :options="districts"
+                       :multiple="true"
+                       :close-on-select="false"
+                       class="mb-3" />
+        </b-form-group>
+      </b-col>
+      </b-row>
+      <b-row>
+        <b-col sm='3'/>
+        <b-col sm='4' style="margin-left: 50px;">
+        <b-button variant='success' style="height: 50px; width: 150px;" v-on:click="filterPlaces()">
           Filtruj
         </b-button>
+        <b-button variant='secondary' style="height: 50px; width: 150px;" v-on:click="clearFilters()">
+          Wyczyść
+        </b-button>
+      </b-col>
+        <b-col sm='4'/>
     </b-row>
-    <b-row>
+    <b-row style='margin-top: 20px;'>
       <b-col sm='4' v-for="place in places">
         <b-card v-bind:title="place.name"
                     v-bind:img-src="place.image"
@@ -57,6 +77,7 @@
 
 <script>
 import PlaceRating from './PlaceRating'
+import Multiselect from 'vue-multiselect'
 
 export default {
   name: 'places-list',
@@ -66,8 +87,12 @@ export default {
         selectedAge: null,
         minRating: null,
         freeEntrance: null,
+        selectedDistricts: [],
         minRatingOptions: [ 1, 2, 3, 4, 5],
-        freeEntranceOptions: [ { value: 'false', text: 'Nie'}, { value: 'true', text: 'Tak' } ]
+        freeEntranceOptions: [ { value: 'false', text: 'Nie'}, { value: 'true', text: 'Tak' } ],
+        districts: ['Bemowo', 'Białołęka', 'Bielany', 'Mokotów', 'Ochota', 'Praga-Południe', 'Praga-Północ',
+          'Rembertów', 'Śródmieście', 'Targówek', 'Ursus', 'Ursynów', 'Wawer', 'Wesoła', 'Wilanów', 'Włochy', 'Wola',
+          'Żoliborz']
     }
   },
   methods: {
@@ -99,17 +124,29 @@ export default {
         {
           filters.q.avg_rating_gteq = this.minRating
         }
+      if(this.selectedDistricts)
+        {
+          filters.q.district_in = this.selectedDistricts
+        }
       this.getPlaces(filters)
+    },
+    clearFilters() {
+      this.selectedAge = null;
+      this.freeEntrance = null;
+      this.minRating = null;
+      this.selectedDistricts = [];
+      this.getPlaces();
     }
   },
   beforeMount(){
       this.getPlaces()
   },
   components: {
-    PlaceRating
+    PlaceRating, Multiselect
   }
 }
 </script>
 
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style scoped>
 </style>

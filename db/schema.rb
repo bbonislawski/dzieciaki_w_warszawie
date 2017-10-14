@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171014161949) do
+ActiveRecord::Schema.define(version: 20171014183746) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(version: 20171014161949) do
     t.integer "min_age", default: 0
     t.integer "max_age", default: 100
     t.boolean "free_entrance"
+    t.string "district"
+    t.json "other_data"
   end
 
 end
