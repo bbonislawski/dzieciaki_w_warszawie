@@ -49,6 +49,7 @@ var Component = normalizeComponent(
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__PlaceRating__ = __webpack_require__("c4i+");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_disqus_VueDisqus_vue__ = __webpack_require__("d9EC");
 //
 //
 //
@@ -92,6 +93,14 @@ var Component = normalizeComponent(
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -113,6 +122,7 @@ var Component = normalizeComponent(
       });
     },
     checkQuestionaryAlreadyDone() {
+      console.log(this.$cookie.get('place_questionary_finished_' + this.place.id));
       return this.$cookie.get('place_questionary_finished_' + this.place.id);
     },
     generateLocation() {
@@ -123,7 +133,7 @@ var Component = normalizeComponent(
     this.getPlace();
   },
   components: {
-    PlaceRating: __WEBPACK_IMPORTED_MODULE_0__PlaceRating__["a" /* default */]
+    PlaceRating: __WEBPACK_IMPORTED_MODULE_0__PlaceRating__["a" /* default */], VueDisqus: __WEBPACK_IMPORTED_MODULE_1_vue_disqus_VueDisqus_vue__["a" /* default */]
   }
 });
 
@@ -497,6 +507,9 @@ var Component = normalizeComponent(
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'place',
@@ -554,7 +567,8 @@ var Component = normalizeComponent(
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('b-row',[_c('b-card',{staticClass:"mb-2",staticStyle:{"width":"100%"},attrs:{"title":this.place.name,"img-src":this.place.image,"img-alt":this.place.name,"img-top":"","tag":"article"}},[_c('p',{staticClass:"card-text"},[_c('b-row',[_c('b-col',{attrs:{"sm":"5"}},[_c('gmap-map',{staticStyle:{"width":"100%","height":"300px"},attrs:{"center":_vm.generateLocation(),"zoom":15,"map-type-id":"terrain"}},[_c('gmap-marker',{attrs:{"position":_vm.generateLocation(),"clickable":true}})],1)],1),_vm._v(" "),_c('b-col',{attrs:{"sm":"7"}},[_c('p',[_c('b',[_vm._v("Dzielnica:")]),_vm._v(" "+_vm._s(this.place.district))]),_vm._v(" "),_c('p',[_c('b',[_vm._v("Adres:")]),_vm._v(" "+_vm._s(this.place.address))]),_vm._v("\n          "+_vm._s(this.place.description)+"\n        ")])],1),_vm._v(" "),_c('place-rating',{attrs:{"place":_vm.place}})],1),_vm._v(" "),(!_vm.checkQuestionaryAlreadyDone)?_c('b-button',{attrs:{"variant":"outline-primary","href":'/#/places/' + this.place.id + '/questionary'}},[_vm._v("Wypełnij ankietę")]):_vm._e(),_vm._v(" "),_c('b-col',{attrs:{"sm":"12"}},[_c('b-button',{attrs:{"variant":"outline-primary","href":"/#/places/"}},[_vm._v("Wróć do listy")])],1)],1)],1)}
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('b-row',[_c('b-card',{staticClass:"mb-2",staticStyle:{"width":"100%"},attrs:{"title":this.place.name,"img-src":this.place.image,"img-alt":this.place.name,"img-top":"","tag":"article"}},[_c('p',{staticClass:"card-text"},[_c('b-row',[_c('b-col',{attrs:{"sm":"5"}},[_c('gmap-map',{staticStyle:{"width":"100%","height":"300px"},attrs:{"center":_vm.generateLocation(),"zoom":15,"map-type-id":"terrain"}},[_c('gmap-marker',{attrs:{"position":_vm.generateLocation(),"clickable":true}})],1)],1),_vm._v(" "),_c('b-col',{attrs:{"sm":"7"}},[_c('p',[_c('b',[_vm._v("Dzielnica:")]),_vm._v(" "+_vm._s(this.place.district))]),_vm._v(" "),_c('p',[_c('b',[_vm._v("Adres:")]),_vm._v(" "+_vm._s(this.place.address))]),_vm._v(" "),_c('p',[_c('b',[_vm._v("Opis:")]),_vm._v(" "+_vm._s(this.place.description))])])],1),_vm._v(" "),_c('place-rating',{attrs:{"place":_vm.place}})],1),_vm._v(" "),_c('b-button-group',[(!_vm.checkQuestionaryAlreadyDone())?_c('b-button',{attrs:{"variant":"outline-primary","href":'/#/places/' +
+        this.place.id + '/questionary'}},[_vm._v("Wypełnij ankietę")]):_vm._e(),_vm._v(" "),_c('b-button',{attrs:{"variant":"outline-secondary","href":"/#/places/"}},[_vm._v("Wróć do listy")])],1),_vm._v(" "),_c('div',{staticClass:"comments"},[_c('vue-disqus',{attrs:{"shortname":"dzieciaki-1"}})],1)],1)],1)}
 var staticRenderFns = []
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
@@ -751,7 +765,7 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('b-row',{directives:[{name:"show",rawName:"v-show",value:(!this.alreadyDone),expression:"!this.alreadyDone"}]},[_c('b-card',{staticClass:"mb-2",staticStyle:{"width":"100%"},attrs:{"title":'Oceniasz miejsce: ' + this.place.name,"tag":"article"}},[_c('p',{staticClass:"card-text"},[_c('b-form',{on:{"submit":_vm.onSubmit}},[_c('b-form-group',{attrs:{"id":"exampleInputGroup1","label":"Wiek dziecka:","label-for":"exampleInput1"}},[_c('b-form-input',{attrs:{"id":"exampleInput1","type":"number","min":"0","max":"20","required":"","placeholder":"Wprowadź wiek dziecka"},model:{value:(_vm.form.age),callback:function ($$v) {_vm.$set(_vm.form, "age", $$v)},expression:"form.age"}})],1),_vm._v(" "),_c('b-form-group',{attrs:{"id":"exampleInputGroup2","label":"Czy polecasz to miejsce?","label-for":"exampleInput2"}},[_c('b-form-select',{attrs:{"id":"exampleInput2","required":"","options":['Tak', 'Nie']},model:{value:(_vm.form.recommended),callback:function ($$v) {_vm.$set(_vm.form, "recommended", $$v)},expression:"form.recommended"}})],1),_vm._v(" "),_c('b-form-group',{attrs:{"id":"cleanlinessGroup","label":"Jak oceniasz czystość tego miejsca?","label-for":"exampleInput3"}},[_c('star-rating',{attrs:{"increment":1,"max-rating":10,"rating":_vm.form.cleanlinessRating,"inactive-color":"#000","show-rating":false,"active-color":"#fff000","star-size":30}})],1),_vm._v(" "),_c('b-form-group',{attrs:{"id":"happinessGroup","label":"Jak oceniasz zadowolenie dziecka z tego miejsca?","label-for":"exampleInput4"}},[_c('star-rating',{attrs:{"increment":1,"max-rating":10,"rating":_vm.form.happinessRating,"inactive-color":"#000","show-rating":false,"active-color":"#fff000","star-size":30}})],1),_vm._v(" "),_c('b-form-group',{attrs:{"id":"directionsGroup","label":"Jak oceniasz dostępność tego miejsca?","label-for":"exampleInput5"}},[_c('star-rating',{attrs:{"increment":1,"max-rating":10,"rating":_vm.form.directionsRating,"inactive-color":"#000","show-rating":false,"active-color":"#fff000","star-size":30}})],1),_vm._v(" "),_c('b-button',{attrs:{"type":"submit","variant":"primary"}},[_vm._v("Wyślij ankietę")]),_vm._v(" "),_c('b-button',{attrs:{"type":"reset","variant":"secondary"}},[_vm._v("Wyczyść")])],1)],1)])],1),_vm._v(" "),_c('b-row',{directives:[{name:"show",rawName:"v-show",value:(this.alreadyDone),expression:"this.alreadyDone"}]},[_c('b-col',{attrs:{"sm":"12"}},[_vm._v(" Dziękujemy za wypełnienie ankiety!")]),_vm._v(" "),_c('b-col',{attrs:{"sm":"12"}},[_c('b-button',{attrs:{"variant":"outline-primary","href":'/#/places/' + this.place.id}},[_vm._v("Wróć")])],1)],1)],1)}
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('b-row',{directives:[{name:"show",rawName:"v-show",value:(!this.alreadyDone),expression:"!this.alreadyDone"}]},[_c('b-card',{staticClass:"mb-2",staticStyle:{"width":"100%"},attrs:{"title":'Oceniasz miejsce: ' + this.place.name,"tag":"article"}},[_c('p',{staticClass:"card-text"},[_c('b-form',{on:{"submit":_vm.onSubmit}},[_c('b-form-group',{attrs:{"id":"exampleInputGroup1","label":"Wiek dziecka:","label-for":"exampleInput1"}},[_c('b-form-input',{attrs:{"id":"exampleInput1","type":"number","min":"0","max":"20","required":"","placeholder":"Wprowadź wiek dziecka"},model:{value:(_vm.form.age),callback:function ($$v) {_vm.$set(_vm.form, "age", $$v)},expression:"form.age"}})],1),_vm._v(" "),_c('b-form-group',{attrs:{"id":"exampleInputGroup2","label":"Czy polecasz to miejsce?","label-for":"exampleInput2"}},[_c('b-form-select',{attrs:{"id":"exampleInput2","required":"","options":['Tak', 'Nie']},model:{value:(_vm.form.recommended),callback:function ($$v) {_vm.$set(_vm.form, "recommended", $$v)},expression:"form.recommended"}})],1),_vm._v(" "),_c('b-form-group',{attrs:{"id":"cleanlinessGroup","label":"Jak oceniasz czystość tego miejsca?","label-for":"exampleInput3"}},[_c('star-rating',{attrs:{"increment":1,"max-rating":10,"rating":_vm.form.cleanlinessRating,"inactive-color":"#000","show-rating":false,"active-color":"#fff000","star-size":30},model:{value:(_vm.form.cleanlinessRating),callback:function ($$v) {_vm.$set(_vm.form, "cleanlinessRating", $$v)},expression:"form.cleanlinessRating"}})],1),_vm._v(" "),_c('b-form-group',{attrs:{"id":"happinessGroup","label":"Jak oceniasz zadowolenie dziecka z tego miejsca?","label-for":"exampleInput4"}},[_c('star-rating',{attrs:{"increment":1,"max-rating":10,"rating":_vm.form.happinessRating,"inactive-color":"#000","show-rating":false,"active-color":"#fff000","star-size":30},model:{value:(_vm.form.happinessRating),callback:function ($$v) {_vm.$set(_vm.form, "happinessRating", $$v)},expression:"form.happinessRating"}})],1),_vm._v(" "),_c('b-form-group',{attrs:{"id":"directionsGroup","label":"Jak oceniasz dostępność tego miejsca?","label-for":"exampleInput5"}},[_c('star-rating',{attrs:{"increment":1,"max-rating":10,"rating":_vm.form.directionsRating,"inactive-color":"#000","show-rating":false,"active-color":"#fff000","star-size":30},model:{value:(_vm.form.directionsRating),callback:function ($$v) {_vm.$set(_vm.form, "directionsRating", $$v)},expression:"form.directionsRating"}})],1),_vm._v(" "),_c('b-button',{attrs:{"type":"submit","variant":"primary"}},[_vm._v("Wyślij ankietę")]),_vm._v(" "),_c('b-button',{attrs:{"type":"reset","variant":"secondary"}},[_vm._v("Wyczyść")])],1)],1)])],1),_vm._v(" "),_c('b-row',{directives:[{name:"show",rawName:"v-show",value:(this.alreadyDone),expression:"this.alreadyDone"}]},[_c('b-col',{attrs:{"sm":"12"}},[_vm._v(" Dziękujemy za wypełnienie ankiety!")]),_vm._v(" "),_c('b-col',{attrs:{"sm":"12"}},[_c('b-button',{attrs:{"variant":"outline-primary","href":'/#/places/' + this.place.id}},[_vm._v("Wróć")])],1)],1)],1)}
 var staticRenderFns = []
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
@@ -945,10 +959,147 @@ var Component = normalizeComponent(
 
 /***/ }),
 
+/***/ "d9EC":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_vue_loader_lib_selector_type_script_index_0_VueDisqus_vue__ = __webpack_require__("gNKr");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__vue_loader_lib_template_compiler_index_id_data_v_33f1fad6_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_buble_transforms_vue_loader_lib_selector_type_template_index_0_VueDisqus_vue__ = __webpack_require__("jkVy");
+var normalizeComponent = __webpack_require__("VU/8")
+/* script */
+
+/* template */
+
+/* template functional */
+  var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_vue_loader_lib_selector_type_script_index_0_VueDisqus_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__vue_loader_lib_template_compiler_index_id_data_v_33f1fad6_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_buble_transforms_vue_loader_lib_selector_type_template_index_0_VueDisqus_vue__["a" /* default */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+
+/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+
+
+/***/ }),
+
 /***/ "fWn3":
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "gNKr":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  name: 'vue-disqus',
+  props: {
+    shortname: {
+      type: String,
+      required: true
+    },
+    identifier: {
+      type: String,
+      required: false
+    },
+    url: {
+      type: String,
+      required: false
+    },
+    title: {
+      type: String,
+      required: false
+    },
+    remote_auth_s3: {
+      type: String,
+      required: false
+    },
+    api_key: {
+      type: String,
+      required: false
+    },
+    sso_config: {
+      type: Object,
+      required: false
+    }
+  },
+  mounted() {
+    if (window.DISQUS) {
+      this.reset(window.DISQUS);
+      return;
+    }
+    this.init();
+  },
+  methods: {
+    reset(dsq) {
+      const self = this;
+      dsq.reset({
+        reload: true,
+        config: function () {
+          this.page.identifier = self.identifier || self.$route.path || window.location.pathname;
+          this.page.url = self.url || self.$el.baseURI;
+          if (self.title) {
+            this.page.title = self.title;
+          }
+          if (self.remote_auth_s3) {
+            this.page.remote_auth_s3 = self.remote_auth_s3;
+          }
+          if (self.key) {
+            this.page.api_key = self.key;
+          }
+          if (self.sso_config) {
+            this.sso = self.sso_config;
+          }
+        }
+      });
+    },
+    init() {
+      const self = this;
+      window.disqus_config = function () {
+        this.page.identifier = self.identifier || self.$route.path || window.location.pathname;
+        this.page.url = self.url || self.$el.baseURI;
+        if (self.title) {
+          this.page.title = self.title;
+        }
+        if (self.remote_auth_s3) {
+          this.page.remote_auth_s3 = self.remote_auth_s3;
+        }
+        if (self.api_key) {
+          this.page.api_key = self.api_key;
+        }
+        if (self.sso_config) {
+          this.sso = self.sso_config;
+        }
+      };
+      setTimeout(() => {
+        let d = document,
+            s = d.createElement('script');
+        s.type = 'text/javascript';
+        s.async = true;
+        s.setAttribute('id', 'embed-disqus');
+        s.setAttribute('data-timestamp', +new Date());
+        s.src = `//${this.shortname}.disqus.com/embed.js`;(d.head || d.body).appendChild(s);
+      }, 0);
+    }
+  }
+});
 
 /***/ }),
 
@@ -979,6 +1130,17 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('b-navbar',{attrs:{"toggleable":"md","type":"dark"}},[_c('b-nav-toggle',{attrs:{"target":"nav_collapse"}}),_vm._v(" "),_c('b-navbar-brand',{staticStyle:{"width":"80%","padding-left":"10%"},attrs:{"href":"/#/"}},[_c('b-img',{staticStyle:{"width":"100%"},attrs:{"src":"/static/logo1.png"}})],1),_vm._v(" "),_c('b-collapse',{attrs:{"is-nav":"","id":"nav_collapse"}},[_c('b-nav',{staticClass:"ml-auto",staticStyle:{"padding-right":"25%"},attrs:{"is-nav-bar":""}},[_c('b-nav-item',{attrs:{"href":"/#/places","active":""}},[_vm._v("Miejsca")]),_vm._v(" "),_c('b-nav-item',{attrs:{"disabled":"","href":"/#/events"}},[_vm._v("Wydarzenia")])],1)],1)],1)}
+var staticRenderFns = []
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+
+/***/ }),
+
+/***/ "jkVy":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"disqus_thread"}})}
 var staticRenderFns = []
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
@@ -1180,4 +1342,4 @@ var Component = normalizeComponent(
 /***/ })
 
 },["NHnr"]);
-//# sourceMappingURL=app.85a3f3da175820ac611a.js.map
+//# sourceMappingURL=app.526f38d3e4d875914f1f.js.map

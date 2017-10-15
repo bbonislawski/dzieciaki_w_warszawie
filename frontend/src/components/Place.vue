@@ -27,22 +27,30 @@
           <b-col sm='7'>
             <p><b>Dzielnica:</b> {{ this.place.district }}</p>
             <p><b>Adres:</b> {{ this.place.address }}</p>
-            {{ this.place.description }}
+            <p><b>Opis:</b> {{ this.place.description }}</p>
           </b-col>
 
         </b-row>
         <place-rating v-bind:place="place" />
       </p>
 
-      <b-button v-if="!checkQuestionaryAlreadyDone" variant="outline-primary" v-bind:href="'/#/places/' + this.place.id + '/questionary'">Wypełnij ankietę</b-button>
+      <b-button-group>
+        <b-button v-if="!checkQuestionaryAlreadyDone()" variant="outline-primary" v-bind:href="'/#/places/' +
+          this.place.id + '/questionary'" >Wypełnij ankietę</b-button>
 
-      <b-col sm="12"><b-button variant="outline-primary" href='/#/places/'>Wróć do listy</b-button></b-col>
+        <b-button variant="outline-secondary" href='/#/places/'>Wróć do listy</b-button>
+      </b-button-group>
+
+      <div class="comments">
+        <vue-disqus shortname="dzieciaki-1"></vue-disqus>
+      </div>
     </b-card>
   </b-row>
 </template>
 
 <script>
 import PlaceRating from './PlaceRating'
+import VueDisqus from 'vue-disqus/VueDisqus.vue'
 
 export default {
   name: 'place',
@@ -62,6 +70,7 @@ export default {
       });
     },
     checkQuestionaryAlreadyDone() {
+      console.log(this.$cookie.get('place_questionary_finished_' + this.place.id))
       return this.$cookie.get('place_questionary_finished_' + this.place.id)
     },
     generateLocation() {
@@ -72,7 +81,7 @@ export default {
       this.getPlace()
   },
   components: {
-    PlaceRating
+    PlaceRating, VueDisqus
   }
 }
 </script>

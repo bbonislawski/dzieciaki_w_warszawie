@@ -28,6 +28,7 @@
               <star-rating v-bind:increment="1"
                           v-bind:max-rating="10"
                           v-bind:rating="form.cleanlinessRating"
+                          v-model="form.cleanlinessRating"
                           inactive-color="#000"
                           v-bind:show-rating=false
                           active-color="#fff000"
@@ -40,6 +41,7 @@
               <star-rating v-bind:increment="1"
                           v-bind:max-rating="10"
                           v-bind:rating="form.happinessRating"
+                          v-model="form.happinessRating"
                           inactive-color="#000"
                           v-bind:show-rating=false
                           active-color="#fff000"
@@ -52,6 +54,7 @@
               <star-rating v-bind:increment="1"
                           v-bind:max-rating="10"
                           v-bind:rating="form.directionsRating"
+                          v-model="form.directionsRating"
                           inactive-color="#000"
                           v-bind:show-rating=false
                           active-color="#fff000"
