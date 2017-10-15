@@ -62,7 +62,7 @@
             </b-form-group>
 
             <b-form-group id="exampleInputGroup10"
-                          label="Wysokość geograficzna:" label-for="exampleInput10"
+                          label="Długość geograficzna:" label-for="exampleInput10"
                           >
               <b-form-input id="exampleInput10"
                             type="number" step="0.0000001" v-model="form.lng" required
