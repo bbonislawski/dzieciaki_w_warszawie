@@ -86,6 +86,12 @@ var Component = normalizeComponent(
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -93,7 +99,7 @@ var Component = normalizeComponent(
   name: 'place',
   data() {
     return {
-      place: { name: '', image: '', description: '', lat: 0, lng: 0 }
+      place: { name: '', image: '', description: '', lat: 0, lng: 0, rating: 0 }
     };
   },
   methods: {
@@ -106,6 +112,9 @@ var Component = normalizeComponent(
         console.log('error');
       });
     },
+    checkQuestionaryAlreadyDone() {
+      return this.$cookie.get('place_questionary_finished_' + this.place.id);
+    },
     generateLocation() {
       return { lat: parseFloat(this.place.lat), lng: parseFloat(this.place.lng) };
     }
@@ -117,6 +126,42 @@ var Component = normalizeComponent(
     PlaceRating: __WEBPACK_IMPORTED_MODULE_0__PlaceRating__["a" /* default */]
   }
 });
+
+/***/ }),
+
+/***/ "3h5k":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_PlaceQuestionary_vue__ = __webpack_require__("IW2I");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_e93ce5cc_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_PlaceQuestionary_vue__ = __webpack_require__("Wrw4");
+function injectStyle (ssrContext) {
+  __webpack_require__("7uRg")
+}
+var normalizeComponent = __webpack_require__("VU/8")
+/* script */
+
+/* template */
+
+/* template functional */
+  var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-e93ce5cc"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_PlaceQuestionary_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_e93ce5cc_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_PlaceQuestionary_vue__["a" /* default */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+
+/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+
 
 /***/ }),
 
@@ -202,6 +247,13 @@ var Component = normalizeComponent(
 
 /***/ }),
 
+/***/ "7uRg":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "9M+g":
 /***/ (function(module, exports) {
 
@@ -216,6 +268,8 @@ var Component = normalizeComponent(
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__PlaceRating__ = __webpack_require__("c4i+");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_multiselect__ = __webpack_require__("RUzx");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_multiselect___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_multiselect__);
+//
+//
 //
 //
 //
@@ -359,6 +413,136 @@ var Component = normalizeComponent(
 
 /***/ }),
 
+/***/ "IW2I":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  name: 'place',
+  data() {
+    return {
+      alreadyDone: false,
+      place: { name: '', image: '', description: '', lat: 0, lng: 0, rating: 0 },
+      form: {
+        age: '',
+        recommended: '',
+        cleanlinessRating: 0,
+        happinessRating: 0,
+        directionsRating: 0
+      }
+    };
+  },
+  methods: {
+    getPlace() {
+      this.$http.get(API_URL + '/places/' + this.$route.params.id).then(response => {
+        console.log(response.body);
+        this.place = response.body;
+        this.alreadyDone = this.checkAlreadyDone();
+      }, response => {
+        console.log('error');
+      });
+    },
+    onSubmit(evt) {
+      evt.preventDefault();
+      this.$http.post(API_URL + '/places/' + this.place.id + '/questionary', { data: this.form }).then(response => {
+        this.$cookie.set('place_questionary_finished_' + this.place.id, true, 30);
+        this.alreadyDone = true;
+      }, response => {
+        console.log('error');
+      });
+    },
+    checkAlreadyDone() {
+      return this.$cookie.get('place_questionary_finished_' + this.place.id);
+    }
+  },
+  beforeMount() {
+    this.getPlace();
+  }
+});
+
+/***/ }),
+
 /***/ "Jmt5":
 /***/ (function(module, exports) {
 
@@ -370,7 +554,7 @@ var Component = normalizeComponent(
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('b-row',[_c('b-card',{staticClass:"mb-2",staticStyle:{"width":"100%"},attrs:{"title":this.place.name,"img-src":this.place.image,"img-alt":this.place.name,"img-top":"","tag":"article"}},[_c('p',{staticClass:"card-text"},[_c('b-row',[_c('b-col',{attrs:{"sm":"5"}},[_c('gmap-map',{staticStyle:{"width":"100%","height":"300px"},attrs:{"center":_vm.generateLocation(),"zoom":15,"map-type-id":"terrain"}},[_c('gmap-marker',{attrs:{"position":_vm.generateLocation(),"clickable":true}})],1)],1),_vm._v(" "),_c('b-col',{attrs:{"sm":"7"}},[_vm._v("\n        "+_vm._s(this.place.description)+"\n      ")])],1),_vm._v(" "),_c('place-rating',{attrs:{"place":_vm.place}})],1)])],1)}
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('b-row',[_c('b-card',{staticClass:"mb-2",staticStyle:{"width":"100%"},attrs:{"title":this.place.name,"img-src":this.place.image,"img-alt":this.place.name,"img-top":"","tag":"article"}},[_c('p',{staticClass:"card-text"},[_c('b-row',[_c('b-col',{attrs:{"sm":"5"}},[_c('gmap-map',{staticStyle:{"width":"100%","height":"300px"},attrs:{"center":_vm.generateLocation(),"zoom":15,"map-type-id":"terrain"}},[_c('gmap-marker',{attrs:{"position":_vm.generateLocation(),"clickable":true}})],1)],1),_vm._v(" "),_c('b-col',{attrs:{"sm":"7"}},[_c('p',[_c('b',[_vm._v("Dzielnica:")]),_vm._v(" "+_vm._s(this.place.district))]),_vm._v(" "),_c('p',[_c('b',[_vm._v("Adres:")]),_vm._v(" "+_vm._s(this.place.address))]),_vm._v("\n          "+_vm._s(this.place.description)+"\n        ")])],1),_vm._v(" "),_c('place-rating',{attrs:{"place":_vm.place}})],1),_vm._v(" "),(!_vm.checkQuestionaryAlreadyDone)?_c('b-button',{attrs:{"variant":"outline-primary","href":'/#/places/' + this.place.id + '/questionary'}},[_vm._v("Wypełnij ankietę")]):_vm._e(),_vm._v(" "),_c('b-col',{attrs:{"sm":"12"}},[_c('b-button',{attrs:{"variant":"outline-primary","href":"/#/places/"}},[_vm._v("Wróć do listy")])],1)],1)],1)}
 var staticRenderFns = []
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
@@ -417,7 +601,7 @@ var Component = normalizeComponent(
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('b-row',[_c('b-col',{attrs:{"sm":"3"}},[_c('b-form-group',{attrs:{"id":"fieldset1","label":"Wiek dziecka"}},[_c('b-form-input',{attrs:{"type":"number","min":"0","max":"20"},model:{value:(_vm.selectedAge),callback:function ($$v) {_vm.selectedAge=$$v},expression:"selectedAge"}})],1)],1),_vm._v(" "),_c('b-col',{attrs:{"sm":"3"}},[_c('b-form-group',{attrs:{"id":"fieldset2","label":"Minimalna ocena"}},[_c('b-form-select',{staticClass:"mb-3",attrs:{"options":_vm.minRatingOptions},model:{value:(_vm.minRating),callback:function ($$v) {_vm.minRating=$$v},expression:"minRating"}})],1)],1),_vm._v(" "),_c('b-col',{attrs:{"sm":"3"}},[_c('b-form-group',{attrs:{"id":"fieldset3","label":"Darmowe wejscie"}},[_c('b-form-select',{staticClass:"mb-3",attrs:{"options":_vm.freeEntranceOptions},model:{value:(_vm.freeEntrance),callback:function ($$v) {_vm.freeEntrance=$$v},expression:"freeEntrance"}})],1)],1),_vm._v(" "),_c('b-col',{attrs:{"sm":"3"}},[_c('b-form-group',{attrs:{"id":"fieldset4","label":"Dzielnica"}},[_c('multiselect',{staticClass:"mb-3",attrs:{"options":_vm.districts,"multiple":true,"close-on-select":false},model:{value:(_vm.selectedDistricts),callback:function ($$v) {_vm.selectedDistricts=$$v},expression:"selectedDistricts"}})],1)],1)],1),_vm._v(" "),_c('b-row',[_c('b-col',{attrs:{"sm":"3"}}),_vm._v(" "),_c('b-col',{staticStyle:{"margin-left":"50px"},attrs:{"sm":"4"}},[_c('b-button',{staticStyle:{"height":"50px","width":"150px"},attrs:{"variant":"success"},on:{"click":function($event){_vm.filterPlaces()}}},[_vm._v("\n        Filtruj\n      ")]),_vm._v(" "),_c('b-button',{staticStyle:{"height":"50px","width":"150px"},attrs:{"variant":"secondary"},on:{"click":function($event){_vm.clearFilters()}}},[_vm._v("\n        Wyczyść\n      ")])],1),_vm._v(" "),_c('b-col',{attrs:{"sm":"4"}})],1),_vm._v(" "),_c('b-row',{staticStyle:{"margin-top":"20px"}},_vm._l((_vm.places),function(place){return _c('b-col',{attrs:{"sm":"4"}},[_c('b-card',{staticClass:"mb-2",staticStyle:{"max-width":"20rem"},attrs:{"title":place.name,"img-src":place.image,"img-alt":place.name,"img-top":"","tag":"article"}},[_c('p',{staticClass:"card-text"},[_vm._v("\n          "+_vm._s(place.short_description)+"\n        ")]),_vm._v(" "),_c('place-rating',{attrs:{"place":place}}),_vm._v(" "),_c('b-button',{staticStyle:{"border-radius":"15em"},attrs:{"href":'/#/places/' + place.id,"variant":"primary"}},[_vm._v("Sprawdź")])],1)],1)}))],1)}
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('b-row',[_c('b-col',{attrs:{"sm":"3"}},[_c('b-form-group',{attrs:{"id":"fieldset1","label":"Wiek dziecka"}},[_c('b-form-input',{attrs:{"type":"number","min":"0","max":"20"},model:{value:(_vm.selectedAge),callback:function ($$v) {_vm.selectedAge=$$v},expression:"selectedAge"}})],1)],1),_vm._v(" "),_c('b-col',{attrs:{"sm":"3"}},[_c('b-form-group',{attrs:{"id":"fieldset2","label":"Minimalna ocena"}},[_c('b-form-select',{staticClass:"mb-3",attrs:{"options":_vm.minRatingOptions},model:{value:(_vm.minRating),callback:function ($$v) {_vm.minRating=$$v},expression:"minRating"}})],1)],1),_vm._v(" "),_c('b-col',{attrs:{"sm":"3"}},[_c('b-form-group',{attrs:{"id":"fieldset3","label":"Darmowe wejscie"}},[_c('b-form-select',{staticClass:"mb-3",attrs:{"options":_vm.freeEntranceOptions},model:{value:(_vm.freeEntrance),callback:function ($$v) {_vm.freeEntrance=$$v},expression:"freeEntrance"}})],1)],1),_vm._v(" "),_c('b-col',{attrs:{"sm":"3"}},[_c('b-form-group',{attrs:{"id":"fieldset4","label":"Dzielnica"}},[_c('multiselect',{staticClass:"mb-3",attrs:{"options":_vm.districts,"multiple":true,"close-on-select":false},model:{value:(_vm.selectedDistricts),callback:function ($$v) {_vm.selectedDistricts=$$v},expression:"selectedDistricts"}})],1)],1)],1),_vm._v(" "),_c('b-row',[_c('b-col',{attrs:{"sm":"3"}}),_vm._v(" "),_c('b-col',{staticStyle:{"margin-left":"50px"},attrs:{"sm":"4"}},[_c('b-button-group',[_c('b-button',{staticStyle:{"height":"50px","width":"150px"},attrs:{"variant":"success"},on:{"click":function($event){_vm.filterPlaces()}}},[_vm._v("\n          Filtruj\n        ")]),_vm._v(" "),_c('b-button',{staticStyle:{"height":"50px","width":"150px"},attrs:{"variant":"secondary"},on:{"click":function($event){_vm.clearFilters()}}},[_vm._v("\n          Wyczyść\n        ")])],1)],1),_vm._v(" "),_c('b-col',{attrs:{"sm":"4"}})],1),_vm._v(" "),_c('b-row',{staticClass:"align-items-stretch",staticStyle:{"margin-top":"20px"}},_vm._l((_vm.places),function(place){return _c('b-col',{attrs:{"sm":"4"}},[_c('b-card',{staticClass:"mb-2",staticStyle:{"max-width":"20rem"},attrs:{"title":place.name,"img-src":place.image,"img-alt":place.name,"img-top":"","tag":"article"}},[_c('p',{staticClass:"card-text"},[_vm._v("\n          "+_vm._s(place.short_description)+"\n        ")]),_vm._v(" "),_c('place-rating',{attrs:{"place":place}}),_vm._v(" "),_c('b-button',{staticStyle:{"border-radius":"15em"},attrs:{"href":'/#/places/' + place.id,"variant":"primary"}},[_vm._v("Sprawdź")])],1)],1)}))],1)}
 var staticRenderFns = []
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
@@ -563,6 +747,17 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 
 /***/ }),
 
+/***/ "Wrw4":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('b-row',{directives:[{name:"show",rawName:"v-show",value:(!this.alreadyDone),expression:"!this.alreadyDone"}]},[_c('b-card',{staticClass:"mb-2",staticStyle:{"width":"100%"},attrs:{"title":'Oceniasz miejsce: ' + this.place.name,"tag":"article"}},[_c('p',{staticClass:"card-text"},[_c('b-form',{on:{"submit":_vm.onSubmit}},[_c('b-form-group',{attrs:{"id":"exampleInputGroup1","label":"Wiek dziecka:","label-for":"exampleInput1"}},[_c('b-form-input',{attrs:{"id":"exampleInput1","type":"number","min":"0","max":"20","required":"","placeholder":"Wprowadź wiek dziecka"},model:{value:(_vm.form.age),callback:function ($$v) {_vm.$set(_vm.form, "age", $$v)},expression:"form.age"}})],1),_vm._v(" "),_c('b-form-group',{attrs:{"id":"exampleInputGroup2","label":"Czy polecasz to miejsce?","label-for":"exampleInput2"}},[_c('b-form-select',{attrs:{"id":"exampleInput2","required":"","options":['Tak', 'Nie']},model:{value:(_vm.form.recommended),callback:function ($$v) {_vm.$set(_vm.form, "recommended", $$v)},expression:"form.recommended"}})],1),_vm._v(" "),_c('b-form-group',{attrs:{"id":"cleanlinessGroup","label":"Jak oceniasz czystość tego miejsca?","label-for":"exampleInput3"}},[_c('star-rating',{attrs:{"increment":1,"max-rating":10,"rating":_vm.form.cleanlinessRating,"inactive-color":"#000","show-rating":false,"active-color":"#fff000","star-size":30}})],1),_vm._v(" "),_c('b-form-group',{attrs:{"id":"happinessGroup","label":"Jak oceniasz zadowolenie dziecka z tego miejsca?","label-for":"exampleInput4"}},[_c('star-rating',{attrs:{"increment":1,"max-rating":10,"rating":_vm.form.happinessRating,"inactive-color":"#000","show-rating":false,"active-color":"#fff000","star-size":30}})],1),_vm._v(" "),_c('b-form-group',{attrs:{"id":"directionsGroup","label":"Jak oceniasz dostępność tego miejsca?","label-for":"exampleInput5"}},[_c('star-rating',{attrs:{"increment":1,"max-rating":10,"rating":_vm.form.directionsRating,"inactive-color":"#000","show-rating":false,"active-color":"#fff000","star-size":30}})],1),_vm._v(" "),_c('b-button',{attrs:{"type":"submit","variant":"primary"}},[_vm._v("Wyślij ankietę")]),_vm._v(" "),_c('b-button',{attrs:{"type":"reset","variant":"secondary"}},[_vm._v("Wyczyść")])],1)],1)])],1),_vm._v(" "),_c('b-row',{directives:[{name:"show",rawName:"v-show",value:(this.alreadyDone),expression:"this.alreadyDone"}]},[_c('b-col',{attrs:{"sm":"12"}},[_vm._v(" Dziękujemy za wypełnienie ankiety!")]),_vm._v(" "),_c('b-col',{attrs:{"sm":"12"}},[_c('b-button',{attrs:{"variant":"outline-primary","href":'/#/places/' + this.place.id}},[_vm._v("Wróć")])],1)],1)],1)}
+var staticRenderFns = []
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+
+/***/ }),
+
 /***/ "YI6p":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -605,7 +800,9 @@ var Component = normalizeComponent(
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__("/ocq");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_resource__ = __webpack_require__("ORbq");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Place__ = __webpack_require__("RktK");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_PlacesList__ = __webpack_require__("vEw1");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_PlaceQuestionary__ = __webpack_require__("3h5k");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_PlacesList__ = __webpack_require__("vEw1");
+
 
 
 
@@ -617,15 +814,19 @@ __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].use(__WEBPACK_IMPORTED_MODU
   routes: [{
     path: '/places',
     name: 'Places List',
-    component: __WEBPACK_IMPORTED_MODULE_4__components_PlacesList__["a" /* default */]
+    component: __WEBPACK_IMPORTED_MODULE_5__components_PlacesList__["a" /* default */]
   }, {
     path: '/',
     name: 'Root',
-    component: __WEBPACK_IMPORTED_MODULE_4__components_PlacesList__["a" /* default */]
+    component: __WEBPACK_IMPORTED_MODULE_5__components_PlacesList__["a" /* default */]
   }, {
     path: '/places/:id',
     name: 'Place',
     component: __WEBPACK_IMPORTED_MODULE_3__components_Place__["a" /* default */]
+  }, {
+    path: '/places/:id/questionary',
+    name: 'Place Questionary',
+    component: __WEBPACK_IMPORTED_MODULE_4__components_PlaceQuestionary__["a" /* default */]
   }]
 }));
 
@@ -635,7 +836,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].use(__WEBPACK_IMPORTED_MODU
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('star-rating',{staticStyle:{"justify-content":"center"},attrs:{"increment":1,"max-rating":5,"rating":_vm.place.rating,"read-only":_vm.isRated(_vm.place),"inactive-color":"#000","show-rating":false,"active-color":_vm.starColor(_vm.place),"star-size":30},on:{"rating-selected":function($event){_vm.setRating($event, _vm.place)}}}),_vm._v(" "),_c('p',[_vm._v("\n    "+_vm._s(_vm.getRating(_vm.place))+"\n  ")])],1)}
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('star-rating',{staticStyle:{"justify-content":"center"},attrs:{"increment":1,"max-rating":5,"rating":parseFloat(_vm.place.rating),"read-only":_vm.isRated(_vm.place),"inactive-color":"#000","show-rating":false,"active-color":_vm.starColor(_vm.place),"star-size":30},on:{"rating-selected":function($event){_vm.setRating($event, _vm.place)}}}),_vm._v(" "),_c('p',[_vm._v("\n    "+_vm._s(_vm.getRating(_vm.place))+"\n  ")])],1)}
 var staticRenderFns = []
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
@@ -646,8 +847,6 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-//
-//
 //
 //
 //
@@ -779,7 +978,7 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('b-navbar',{attrs:{"toggleable":"md","type":"dark"}},[_c('b-nav-toggle',{attrs:{"target":"nav_collapse"}}),_vm._v(" "),_c('b-navbar-brand',{staticStyle:{"width":"80%","padding-left":"10%"},attrs:{"href":"/#/"}},[_c('b-img',{staticStyle:{"width":"100%"},attrs:{"src":"/static/logo1.png"}})],1),_vm._v(" "),_c('b-collapse',{attrs:{"is-nav":"","id":"nav_collapse"}},[_c('b-nav',{staticClass:"ml-auto",staticStyle:{"padding-right":"25%"},attrs:{"is-nav-bar":""}},[_c('b-nav-item',{attrs:{"href":"/#/places","active":""}},[_vm._v("Miejsca")]),_vm._v(" "),_c('b-nav-item',{attrs:{"href":"/#/events"}},[_vm._v("Wydarzenia")])],1)],1)],1)}
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('b-navbar',{attrs:{"toggleable":"md","type":"dark"}},[_c('b-nav-toggle',{attrs:{"target":"nav_collapse"}}),_vm._v(" "),_c('b-navbar-brand',{staticStyle:{"width":"80%","padding-left":"10%"},attrs:{"href":"/#/"}},[_c('b-img',{staticStyle:{"width":"100%"},attrs:{"src":"/static/logo1.png"}})],1),_vm._v(" "),_c('b-collapse',{attrs:{"is-nav":"","id":"nav_collapse"}},[_c('b-nav',{staticClass:"ml-auto",staticStyle:{"padding-right":"25%"},attrs:{"is-nav-bar":""}},[_c('b-nav-item',{attrs:{"href":"/#/places","active":""}},[_vm._v("Miejsca")]),_vm._v(" "),_c('b-nav-item',{attrs:{"disabled":"","href":"/#/events"}},[_vm._v("Wydarzenia")])],1)],1)],1)}
 var staticRenderFns = []
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
@@ -906,7 +1105,7 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
       if (this.isRated(place)) {
         return "Twoja ocena to: " + this.$cookie.get('place_rated_' + place.id);
       } else {
-        return " ";
+        return "Oceń to miejsce";
       }
     },
     isRated(place) {
@@ -981,4 +1180,4 @@ var Component = normalizeComponent(
 /***/ })
 
 },["NHnr"]);
-//# sourceMappingURL=app.d1559f1a9086550c08fd.js.map
+//# sourceMappingURL=app.85a3f3da175820ac611a.js.map

@@ -2,7 +2,7 @@
   <div>
     <star-rating v-bind:increment="1"
                 v-bind:max-rating="5"
-                v-bind:rating=place.rating
+                v-bind:rating="parseFloat(place.rating)"
                 v-bind:read-only=isRated(place)
                 inactive-color="#000"
                 v-bind:show-rating=false

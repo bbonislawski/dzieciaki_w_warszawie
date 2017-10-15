@@ -40,6 +40,13 @@ class PlacesAPI < API
       place
     end
 
+    params do
+      optional :data
+    end
+    post :questionary do
+      PlaceQuestionary.create!(place_id: params[:id], data: params[:data])
+    end
+
     params { use :places_params }
     put do
       order = Place.find(params[:id])
