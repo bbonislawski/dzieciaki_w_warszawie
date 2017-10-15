@@ -56,7 +56,7 @@
                           label="Szerokosc geograficzna:" label-for="exampleInput9"
                           >
               <b-form-input id="exampleInput9"
-                            type="number" v-model="form.lat" required
+                            type="number" step="0.0000001" v-model="form.lat" required
                             placeholder="Podaj szerokosc geograficzna"
               ></b-form-input>
             </b-form-group>
@@ -65,7 +65,7 @@
                           label="Wysokość geograficzna:" label-for="exampleInput10"
                           >
               <b-form-input id="exampleInput10"
-                            type="number" v-model="form.lng" required
+                            type="number" step="0.0000001" v-model="form.lng" required
                             placeholder="Podaj wysokość geograficzna"
               ></b-form-input>
             </b-form-group>
@@ -125,7 +125,7 @@ export default {
   methods: {
     onSubmit(evt) {
       evt.preventDefault();
-      this.$http.post(API_URL + '/places', { data: this.form }).then(response => {
+      this.$http.post(API_URL + '/places', this.form).then(response => {
         this.alreadyDone = true;
       }, response => {
         console.log('error')
