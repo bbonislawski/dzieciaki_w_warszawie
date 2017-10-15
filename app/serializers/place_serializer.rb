@@ -6,7 +6,7 @@ class PlaceSerializer < ActiveModel::Serializer
   end
 
   def rating
-    (@object.rating.to_f / @object.ratings_count).round(2)
+    @object.avg_rating.round(2)
   end
 
   def image

@@ -48,7 +48,7 @@ export default {
         }
       else
         {
-          return " ";
+          return "Oceń to miejsce";
         }
     },
     isRated(place) {

@@ -15,7 +15,7 @@ class PlacesAPI < API
     optional :q
   end
   get do
-    Place.ransack(params[:q]).result
+    Place.ransack(params[:q]).result.order('places.avg_rating DESC')
   end
 
   params { use :places_params }

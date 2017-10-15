@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171014183746) do
+ActiveRecord::Schema.define(version: 20171015085247) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20171014183746) do
     t.string "image"
     t.decimal "rating", default: "0.0"
     t.integer "ratings_count", default: 0
-    t.decimal "avg_rating"
+    t.decimal "avg_rating", default: "0.0"
     t.integer "min_age", default: 0
     t.integer "max_age", default: 100
     t.boolean "free_entrance"

@@ -55,7 +55,7 @@
       </b-col>
         <b-col sm='4'/>
     </b-row>
-    <b-row style='margin-top: 20px;'>
+    <b-row style='margin-top: 20px;' class='align-items-stretch'>
       <b-col sm='4' v-for="place in places">
         <b-card v-bind:title="place.name"
                     v-bind:img-src="place.image"
@@ -149,4 +149,15 @@ export default {
 
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style scoped>
+.mb-2 {
+  height: 95%;
+}
+
+.card-text {
+  min-height: 100px;
+}
+
+.card-title {
+  min-height: 53px;
+}
 </style>
