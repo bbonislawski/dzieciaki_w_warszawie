@@ -409,6 +409,16 @@ var Component = normalizeComponent(
       this.minRating = null;
       this.selectedDistricts = [];
       this.getPlaces();
+    },
+    placeStyle(place) {
+      if (place.promoted) {
+        return 'max-width: 20rem; background-color: #ffffb0';
+      } else {
+        return 'max-width: 20rem';
+      }
+    },
+    nameWithPromotion(place) {
+      if (place.promoted) return '[POLECANE] ' + place.name;else return place.name;
     }
   },
   beforeMount() {
@@ -754,7 +764,7 @@ var Component = normalizeComponent(
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('b-row',[_c('b-col',{attrs:{"sm":"3"}},[_c('b-form-group',{attrs:{"id":"fieldset1","label":"Wiek dziecka"}},[_c('b-form-input',{attrs:{"type":"number","min":"0","max":"20"},model:{value:(_vm.selectedAge),callback:function ($$v) {_vm.selectedAge=$$v},expression:"selectedAge"}})],1)],1),_vm._v(" "),_c('b-col',{attrs:{"sm":"3"}},[_c('b-form-group',{attrs:{"id":"fieldset2","label":"Minimalna ocena"}},[_c('b-form-select',{staticClass:"mb-3",attrs:{"options":_vm.minRatingOptions},model:{value:(_vm.minRating),callback:function ($$v) {_vm.minRating=$$v},expression:"minRating"}})],1)],1),_vm._v(" "),_c('b-col',{attrs:{"sm":"3"}},[_c('b-form-group',{attrs:{"id":"fieldset3","label":"Darmowe wejscie"}},[_c('b-form-select',{staticClass:"mb-3",attrs:{"options":_vm.freeEntranceOptions},model:{value:(_vm.freeEntrance),callback:function ($$v) {_vm.freeEntrance=$$v},expression:"freeEntrance"}})],1)],1),_vm._v(" "),_c('b-col',{attrs:{"sm":"3"}},[_c('b-form-group',{attrs:{"id":"fieldset4","label":"Dzielnica"}},[_c('multiselect',{staticClass:"mb-3",attrs:{"options":_vm.districts,"multiple":true,"close-on-select":false},model:{value:(_vm.selectedDistricts),callback:function ($$v) {_vm.selectedDistricts=$$v},expression:"selectedDistricts"}})],1)],1)],1),_vm._v(" "),_c('b-row',[_c('b-col',{attrs:{"sm":"3"}}),_vm._v(" "),_c('b-col',{staticStyle:{"margin-left":"50px"},attrs:{"sm":"4"}},[_c('b-button-group',[_c('b-button',{staticStyle:{"height":"50px","width":"150px"},attrs:{"variant":"success"},on:{"click":function($event){_vm.filterPlaces()}}},[_vm._v("\n          Filtruj\n        ")]),_vm._v(" "),_c('b-button',{staticStyle:{"height":"50px","width":"150px"},attrs:{"variant":"secondary"},on:{"click":function($event){_vm.clearFilters()}}},[_vm._v("\n          Wyczyść\n        ")])],1)],1),_vm._v(" "),_c('b-col',{attrs:{"sm":"4"}})],1),_vm._v(" "),_c('b-row',{staticClass:"align-items-stretch",staticStyle:{"margin-top":"20px"}},_vm._l((_vm.places),function(place){return _c('b-col',{attrs:{"sm":"4"}},[_c('b-card',{staticClass:"mb-2",staticStyle:{"max-width":"20rem"},attrs:{"title":place.name,"img-src":place.image,"img-alt":place.name,"img-top":"","tag":"article"}},[_c('p',{staticClass:"card-text"},[_vm._v("\n          "+_vm._s(place.short_description)+"\n        ")]),_vm._v(" "),_c('place-rating',{attrs:{"place":place}}),_vm._v(" "),_c('b-button',{staticStyle:{"border-radius":"15em"},attrs:{"href":'/#/places/' + place.id,"variant":"primary"}},[_vm._v("Sprawdź")])],1)],1)}))],1)}
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('b-row',[_c('b-col',{attrs:{"sm":"3"}},[_c('b-form-group',{attrs:{"id":"fieldset1","label":"Wiek dziecka"}},[_c('b-form-input',{attrs:{"type":"number","min":"0","max":"20"},model:{value:(_vm.selectedAge),callback:function ($$v) {_vm.selectedAge=$$v},expression:"selectedAge"}})],1)],1),_vm._v(" "),_c('b-col',{attrs:{"sm":"3"}},[_c('b-form-group',{attrs:{"id":"fieldset2","label":"Minimalna ocena"}},[_c('b-form-select',{staticClass:"mb-3",attrs:{"options":_vm.minRatingOptions},model:{value:(_vm.minRating),callback:function ($$v) {_vm.minRating=$$v},expression:"minRating"}})],1)],1),_vm._v(" "),_c('b-col',{attrs:{"sm":"3"}},[_c('b-form-group',{attrs:{"id":"fieldset3","label":"Darmowe wejscie"}},[_c('b-form-select',{staticClass:"mb-3",attrs:{"options":_vm.freeEntranceOptions},model:{value:(_vm.freeEntrance),callback:function ($$v) {_vm.freeEntrance=$$v},expression:"freeEntrance"}})],1)],1),_vm._v(" "),_c('b-col',{attrs:{"sm":"3"}},[_c('b-form-group',{attrs:{"id":"fieldset4","label":"Dzielnica"}},[_c('multiselect',{staticClass:"mb-3",attrs:{"options":_vm.districts,"multiple":true,"close-on-select":false},model:{value:(_vm.selectedDistricts),callback:function ($$v) {_vm.selectedDistricts=$$v},expression:"selectedDistricts"}})],1)],1)],1),_vm._v(" "),_c('b-row',[_c('b-col',{attrs:{"sm":"3"}}),_vm._v(" "),_c('b-col',{staticStyle:{"margin-left":"50px"},attrs:{"sm":"4"}},[_c('b-button-group',[_c('b-button',{staticStyle:{"height":"50px","width":"150px"},attrs:{"variant":"success"},on:{"click":function($event){_vm.filterPlaces()}}},[_vm._v("\n          Filtruj\n        ")]),_vm._v(" "),_c('b-button',{staticStyle:{"height":"50px","width":"150px"},attrs:{"variant":"secondary"},on:{"click":function($event){_vm.clearFilters()}}},[_vm._v("\n          Wyczyść\n        ")])],1)],1),_vm._v(" "),_c('b-col',{attrs:{"sm":"4"}})],1),_vm._v(" "),_c('b-row',{staticClass:"align-items-stretch",staticStyle:{"margin-top":"20px"}},_vm._l((_vm.places),function(place){return _c('b-col',{attrs:{"sm":"4"}},[_c('b-card',{staticClass:"mb-2",style:(_vm.placeStyle(place)),attrs:{"title":_vm.nameWithPromotion(place),"img-src":place.image,"img-alt":place.name,"img-top":"","tag":"article"}},[_c('p',{staticClass:"card-text"},[_vm._v("\n          "+_vm._s(place.short_description)+"\n        ")]),_vm._v(" "),_c('place-rating',{attrs:{"place":place}}),_vm._v(" "),_c('b-button',{staticStyle:{"border-radius":"15em"},attrs:{"href":'/#/places/' + place.id,"variant":"primary"}},[_vm._v("Sprawdź")])],1)],1)}))],1)}
 var staticRenderFns = []
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
@@ -1541,4 +1551,4 @@ var Component = normalizeComponent(
 /***/ })
 
 },["NHnr"]);
-//# sourceMappingURL=app.e86431b3389af75aa612.js.map
+//# sourceMappingURL=app.2022c47318e940c8ad34.js.map

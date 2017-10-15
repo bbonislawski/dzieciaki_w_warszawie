@@ -19,7 +19,7 @@ class PlacesAPI < API
     optional :q
   end
   get do
-    Place.ransack(params[:q]).result.order(:promotion_level, :desc).order('places.avg_rating DESC').where(approved: true)
+    Place.ransack(params[:q]).result.order('places.promotion_level DESC, places.avg_rating DESC').where(approved: true)
   end
 
   params { use :places_params }

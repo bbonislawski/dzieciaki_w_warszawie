@@ -59,12 +59,12 @@
     </b-row>
     <b-row style='margin-top: 20px;' class='align-items-stretch'>
       <b-col sm='4' v-for="place in places">
-        <b-card v-bind:title="place.name"
+        <b-card v-bind:title="nameWithPromotion(place)"
                     v-bind:img-src="place.image"
                     v-bind:img-alt="place.name"
                     img-top
                     tag="article"
-                    style="max-width: 20rem;"
+                    v-bind:style="placeStyle(place)"
                     class="mb-2">
           <p class="card-text">
             {{ place.short_description }}
@@ -138,6 +138,23 @@ export default {
       this.minRating = null;
       this.selectedDistricts = [];
       this.getPlaces();
+    },
+    placeStyle(place) {
+      if(place.promoted)
+        {
+          return 'max-width: 20rem; background-color: #ffffb0';
+        }
+        else
+        {
+          return 'max-width: 20rem';
+        }
+    },
+    nameWithPromotion(place) {
+      if(place.promoted)
+        return '[POLECANE] ' + place.name
+      else
+        return place.name
+
     }
   },
   beforeMount(){
