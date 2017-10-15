@@ -6,8 +6,8 @@
 
     <b-collapse is-nav id="nav_collapse">
       <b-nav is-nav-bar class="ml-auto" style='padding-right: 25%'>
-        <b-nav-item href="/#/suggest_place" active>Dodaj miejsce</b-nav-item>
-        <b-nav-item href="/#/places" active>Lista Miejsc</b-nav-item>
+        <b-nav-item href="/#/suggest_place">Dodaj miejsce</b-nav-item>
+        <b-nav-item href="/#/places">Lista Miejsc</b-nav-item>
       </b-nav>
 
     </b-collapse>
