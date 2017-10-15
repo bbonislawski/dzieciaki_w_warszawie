@@ -179,4 +179,8 @@ export default {
 .card-title {
   min-height: 53px;
 }
+.card-img-top {
+  height: 150px;
+  width: auto;
+}
 </style>
