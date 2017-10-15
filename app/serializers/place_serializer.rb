@@ -1,5 +1,5 @@
 class PlaceSerializer < ActiveModel::Serializer
-  attributes :id, :lat, :lng, :name, :description, :image, :short_description, :rating, :address, :promoted
+  attributes :id, :lat, :lng, :name, :description, :image, :short_description, :rating, :address, :promoted, :district
 
   def short_description
     @object.description&.truncate(60, separator: ' ')
