@@ -8,6 +8,10 @@ class PlacesAPI < API
       optional :name, type: String
       optional :description, type: String
       optional :image, type: String
+      optional :min_age, type: String
+      optional :max_age, type: String
+      optional :district, type: String
+      optional :address, type: String
     end
   end
 

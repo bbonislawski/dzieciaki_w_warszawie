@@ -114,7 +114,6 @@ var Component = normalizeComponent(
   methods: {
     getPlace() {
       this.$http.get(API_URL + '/places/' + this.$route.params.id).then(response => {
-        console.log(response.body);
         this.place = response.body;
         this.place.rated = this.$cookie.get('place_rated_' + this.place.id) == 'true';
       }, response => {
@@ -122,7 +121,6 @@ var Component = normalizeComponent(
       });
     },
     checkQuestionaryAlreadyDone() {
-      console.log(this.$cookie.get('place_questionary_finished_' + this.place.id));
       return this.$cookie.get('place_questionary_finished_' + this.place.id);
     },
     generateLocation() {
@@ -423,6 +421,148 @@ var Component = normalizeComponent(
 
 /***/ }),
 
+/***/ "HCju":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  name: 'place',
+  data() {
+    return {
+      alreadyDone: false,
+      form: {
+        name: '',
+        min_age: 0,
+        max_age: 20,
+        description: '',
+        image: '',
+        lat: 0,
+        lng: 0,
+        address: '',
+        district: ''
+      }
+    };
+  },
+  methods: {
+    onSubmit(evt) {
+      evt.preventDefault();
+      this.$http.post(API_URL + '/places', { data: this.form }).then(response => {
+        this.alreadyDone = true;
+      }, response => {
+        console.log('error');
+      });
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "IW2I":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -529,7 +669,6 @@ var Component = normalizeComponent(
   methods: {
     getPlace() {
       this.$http.get(API_URL + '/places/' + this.$route.params.id).then(response => {
-        console.log(response.body);
         this.place = response.body;
         this.alreadyDone = this.checkAlreadyDone();
       }, response => {
@@ -682,6 +821,42 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */]({
 
 /***/ }),
 
+/***/ "Nllq":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_SuggestPlace_vue__ = __webpack_require__("HCju");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_1761417c_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_SuggestPlace_vue__ = __webpack_require__("gLxm");
+function injectStyle (ssrContext) {
+  __webpack_require__("n+jy")
+}
+var normalizeComponent = __webpack_require__("VU/8")
+/* script */
+
+/* template */
+
+/* template functional */
+  var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-1761417c"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_SuggestPlace_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_1761417c_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_SuggestPlace_vue__["a" /* default */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+
+/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+
+
+/***/ }),
+
 /***/ "R6gD":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -815,7 +990,9 @@ var Component = normalizeComponent(
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_resource__ = __webpack_require__("ORbq");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Place__ = __webpack_require__("RktK");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_PlaceQuestionary__ = __webpack_require__("3h5k");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_PlacesList__ = __webpack_require__("vEw1");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_SuggestPlace__ = __webpack_require__("Nllq");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_PlacesList__ = __webpack_require__("vEw1");
+
 
 
 
@@ -828,11 +1005,15 @@ __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].use(__WEBPACK_IMPORTED_MODU
   routes: [{
     path: '/places',
     name: 'Places List',
-    component: __WEBPACK_IMPORTED_MODULE_5__components_PlacesList__["a" /* default */]
+    component: __WEBPACK_IMPORTED_MODULE_6__components_PlacesList__["a" /* default */]
   }, {
     path: '/',
     name: 'Root',
-    component: __WEBPACK_IMPORTED_MODULE_5__components_PlacesList__["a" /* default */]
+    component: __WEBPACK_IMPORTED_MODULE_6__components_PlacesList__["a" /* default */]
+  }, {
+    path: '/suggest_place',
+    name: 'Dodaj miejsce',
+    component: __WEBPACK_IMPORTED_MODULE_5__components_SuggestPlace__["a" /* default */]
   }, {
     path: '/places/:id',
     name: 'Place',
@@ -999,6 +1180,17 @@ var Component = normalizeComponent(
 
 /***/ }),
 
+/***/ "gLxm":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('b-row',{directives:[{name:"show",rawName:"v-show",value:(!this.alreadyDone),expression:"!this.alreadyDone"}]},[_c('b-card',{staticClass:"mb-2",staticStyle:{"width":"100%"},attrs:{"title":"Dodaj nowe miejsce","tag":"article"}},[_c('p',{staticClass:"card-text"},[_c('b-form',{on:{"submit":_vm.onSubmit}},[_c('b-form-group',{attrs:{"id":"exampleInputGroup1","label":"Nazwa miejsca:","label-for":"exampleInput1"}},[_c('b-form-input',{attrs:{"id":"exampleInput1","type":"text","required":"","placeholder":"Podaj nazwę"},model:{value:(_vm.form.name),callback:function ($$v) {_vm.$set(_vm.form, "name", $$v)},expression:"form.name"}})],1),_vm._v(" "),_c('b-form-group',{attrs:{"id":"exampleInputGroup2","label":"Opis miejsca:","label-for":"exampleInput2"}},[_c('b-form-textarea',{attrs:{"id":"exampleInput2","required":"","placeholder":"Opisz to miejsce"},model:{value:(_vm.form.description),callback:function ($$v) {_vm.$set(_vm.form, "description", $$v)},expression:"form.description"}})],1),_vm._v(" "),_c('b-form-group',{attrs:{"id":"exampleInputGroup3","label":"Zdjecie:","label-for":"exampleInput3"}},[_c('b-form-input',{attrs:{"id":"exampleInput3","type":"text","required":"","placeholder":"Podaj adres zdjęcia"},model:{value:(_vm.form.image),callback:function ($$v) {_vm.$set(_vm.form, "image", $$v)},expression:"form.image"}})],1),_vm._v(" "),_c('b-form-group',{attrs:{"id":"exampleInputGroup6","label":"Adres:","label-for":"exampleInput6"}},[_c('b-form-input',{attrs:{"id":"exampleInput6","type":"text","required":"","placeholder":"Podaj adres miejsca"},model:{value:(_vm.form.address),callback:function ($$v) {_vm.$set(_vm.form, "address", $$v)},expression:"form.address"}})],1),_vm._v(" "),_c('b-form-group',{attrs:{"id":"exampleInputGroup7","label":"Dzielnica:","label-for":"exampleInput7"}},[_c('b-form-input',{attrs:{"id":"exampleInput7","type":"text","required":"","placeholder":"Podaj dzielnicę"},model:{value:(_vm.form.district),callback:function ($$v) {_vm.$set(_vm.form, "district", $$v)},expression:"form.district"}})],1),_vm._v(" "),_c('b-form-group',{attrs:{"id":"exampleInputGroup9","label":"Szerokosc geograficzna:","label-for":"exampleInput9"}},[_c('b-form-input',{attrs:{"id":"exampleInput9","type":"number","required":"","placeholder":"Podaj szerokosc geograficzna"},model:{value:(_vm.form.lat),callback:function ($$v) {_vm.$set(_vm.form, "lat", $$v)},expression:"form.lat"}})],1),_vm._v(" "),_c('b-form-group',{attrs:{"id":"exampleInputGroup10","label":"Wysokość geograficzna:","label-for":"exampleInput10"}},[_c('b-form-input',{attrs:{"id":"exampleInput10","type":"number","required":"","placeholder":"Podaj wysokość geograficzna"},model:{value:(_vm.form.lng),callback:function ($$v) {_vm.$set(_vm.form, "lng", $$v)},expression:"form.lng"}})],1),_vm._v(" "),_c('b-form-group',{attrs:{"id":"exampleInputGroup4","label":"Sugerowany minimalny wiek dziecka:","label-for":"exampleInput4"}},[_c('b-form-input',{attrs:{"id":"exampleInput4","type":"number","min":"0","max":"20","required":"","placeholder":"Wprowadź minimalny sugerowany wiek dziecka"},model:{value:(_vm.form.min_age),callback:function ($$v) {_vm.$set(_vm.form, "min_age", $$v)},expression:"form.min_age"}})],1),_vm._v(" "),_c('b-form-group',{attrs:{"id":"exampleInputGroup5","label":"Sugerowany maksymalny wiek dziecka:","label-for":"exampleInput5"}},[_c('b-form-input',{attrs:{"id":"exampleInput5","type":"number","min":"0","max":"20","required":"","placeholder":"Wprowadź maksymalny sugerowany wiek dziecka"},model:{value:(_vm.form.max_age),callback:function ($$v) {_vm.$set(_vm.form, "max_age", $$v)},expression:"form.max_age"}})],1),_vm._v(" "),_c('b-button',{attrs:{"type":"submit","variant":"primary"}},[_vm._v("Dodaj miejsce")]),_vm._v(" "),_c('b-button',{attrs:{"type":"reset","variant":"secondary"}},[_vm._v("Wyczyść")])],1)],1)])],1),_vm._v(" "),_c('b-row',{directives:[{name:"show",rawName:"v-show",value:(this.alreadyDone),expression:"this.alreadyDone"}]},[_c('b-col',{attrs:{"sm":"12"}},[_vm._v(" Dziękujemy za dodanie miejsca. Pojawi się na liście gdy je sprawdzimy i zaakceptujemy!")]),_vm._v(" "),_c('b-col',{attrs:{"sm":"12"}},[_c('b-button',{attrs:{"variant":"outline-primary","href":"/#/places/"}},[_vm._v("Wróć")])],1)],1)],1)}
+var staticRenderFns = []
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+
+/***/ }),
+
 /***/ "gNKr":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1129,7 +1321,7 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('b-navbar',{attrs:{"toggleable":"md","type":"dark"}},[_c('b-nav-toggle',{attrs:{"target":"nav_collapse"}}),_vm._v(" "),_c('b-navbar-brand',{staticStyle:{"width":"80%","padding-left":"10%"},attrs:{"href":"/#/"}},[_c('b-img',{staticStyle:{"width":"100%"},attrs:{"src":"/static/logo1.png"}})],1),_vm._v(" "),_c('b-collapse',{attrs:{"is-nav":"","id":"nav_collapse"}},[_c('b-nav',{staticClass:"ml-auto",staticStyle:{"padding-right":"25%"},attrs:{"is-nav-bar":""}},[_c('b-nav-item',{attrs:{"href":"/#/places","active":""}},[_vm._v("Miejsca")]),_vm._v(" "),_c('b-nav-item',{attrs:{"disabled":"","href":"/#/events"}},[_vm._v("Wydarzenia")])],1)],1)],1)}
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('b-navbar',{attrs:{"toggleable":"md","type":"dark"}},[_c('b-nav-toggle',{attrs:{"target":"nav_collapse"}}),_vm._v(" "),_c('b-navbar-brand',{staticStyle:{"width":"80%","padding-left":"10%"},attrs:{"href":"/#/"}},[_c('b-img',{staticStyle:{"width":"100%"},attrs:{"src":"/static/logo1.png"}})],1),_vm._v(" "),_c('b-collapse',{attrs:{"is-nav":"","id":"nav_collapse"}},[_c('b-nav',{staticClass:"ml-auto",staticStyle:{"padding-right":"25%"},attrs:{"is-nav-bar":""}},[_c('b-nav-item',{attrs:{"href":"/#/suggest_place","active":""}},[_vm._v("Dodaj miejsce")]),_vm._v(" "),_c('b-nav-item',{attrs:{"href":"/#/places","active":""}},[_vm._v("Lista Miejsc")])],1)],1)],1)}
 var staticRenderFns = []
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
@@ -1148,6 +1340,13 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 /***/ }),
 
 /***/ "lG1T":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "n+jy":
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
@@ -1342,4 +1541,4 @@ var Component = normalizeComponent(
 /***/ })
 
 },["NHnr"]);
-//# sourceMappingURL=app.526f38d3e4d875914f1f.js.map
+//# sourceMappingURL=app.e86431b3389af75aa612.js.map

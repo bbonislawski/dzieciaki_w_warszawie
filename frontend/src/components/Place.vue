@@ -62,7 +62,6 @@ export default {
   methods: {
     getPlace() {
       this.$http.get(API_URL + '/places/' + this.$route.params.id).then(response => {
-        console.log(response.body);
         this.place = response.body;
         this.place.rated = this.$cookie.get('place_rated_' + this.place.id) == 'true'
       }, response => {
@@ -70,7 +69,6 @@ export default {
       });
     },
     checkQuestionaryAlreadyDone() {
-      console.log(this.$cookie.get('place_questionary_finished_' + this.place.id))
       return this.$cookie.get('place_questionary_finished_' + this.place.id)
     },
     generateLocation() {
