@@ -5,11 +5,9 @@
     <b-navbar-brand style='width: 80%; padding-left: 10%' href="/#/"><b-img style='width: 100%' src="/static/logo1.png"/></b-navbar-brand>
 
     <b-collapse is-nav id="nav_collapse">
-
-
       <b-nav is-nav-bar class="ml-auto" style='padding-right: 25%'>
         <b-nav-item href="/#/places" active>Miejsca</b-nav-item>
-        <b-nav-item href="/#/events">Wydarzenia</b-nav-item>
+        <b-nav-item disabled href="/#/events">Wydarzenia</b-nav-item>
       </b-nav>
 
     </b-collapse>

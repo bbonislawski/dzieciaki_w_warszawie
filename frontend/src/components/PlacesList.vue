@@ -46,12 +46,14 @@
       <b-row>
         <b-col sm='3'/>
         <b-col sm='4' style="margin-left: 50px;">
-        <b-button variant='success' style="height: 50px; width: 150px;" v-on:click="filterPlaces()">
-          Filtruj
-        </b-button>
-        <b-button variant='secondary' style="height: 50px; width: 150px;" v-on:click="clearFilters()">
-          Wyczyść
-        </b-button>
+        <b-button-group>
+          <b-button variant='success' style="height: 50px; width: 150px;" v-on:click="filterPlaces()">
+            Filtruj
+          </b-button>
+          <b-button variant='secondary' style="height: 50px; width: 150px;" v-on:click="clearFilters()">
+            Wyczyść
+          </b-button>
+        </b-button-group>
       </b-col>
         <b-col sm='4'/>
     </b-row>

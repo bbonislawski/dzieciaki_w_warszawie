@@ -25,6 +25,8 @@
 
         </b-col>
         <b-col sm='7'>
+          <p><b>Dzielnica:</b> {{ this.place.district }}</p>
+          <p><b>Adres:</b> {{ this.place.address }}</p>
           {{ this.place.description }}
         </b-col>
 
@@ -69,4 +71,9 @@ export default {
 </script>
 
 <style scoped>
+p {
+  text-align: left;
+  padding-left: 40px;
+  margin-bottom: 0px;
+}
 </style>
